@@ -4,7 +4,7 @@ import React from "react";
 function Portfolio() {
   return (
     <div id="portfolio">
-      Portfolio 
+      <h3>Portfolio </h3>
       <li>blah</li>
       <li>blah</li>
       <li>blah</li>

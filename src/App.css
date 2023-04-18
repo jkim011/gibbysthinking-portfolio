@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #F3CFC6;
 }
 
 .page-container {
@@ -10,4 +11,29 @@
 
 .content-wrap {
   flex: 1;
+}
+
+/* About */
+#about {
+  display: inline-flex;
+}
+
+.profile-avatar {
+  width: 300px;
+  height: auto;
+  border-radius: 50%;
+}
+
+/* Contact */
+.socials {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 40px;
+  height: auto;
+}
+
+.socials:hover {
+  filter: invert(64%) sepia(59%) saturate(275%) hue-rotate(314deg) brightness(100%) contrast(96%);;
 }
