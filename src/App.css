@@ -52,6 +52,14 @@
   margin-top: 45px;
 }
 
+.art {
+  transition: .3s ease;
+}
+.art:hover {
+  cursor: pointer;
+  box-shadow: none;
+}
+
 .art-dimensions {
   width: 500px;
   height: auto;
