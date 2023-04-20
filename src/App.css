@@ -13,15 +13,49 @@
   flex: 1;
 }
 
+.box-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Navbar */
+#navbar {
+  margin-top: 20px;
+}
+
+#nav-brand {
+  margin-left: 5%;
+}
+
+.nav-items {
+  margin-right: 5%;
+}
+
 /* About */
 #about {
   display: inline-flex;
+  margin-top: 25px;
 }
 
 .profile-avatar {
   width: 300px;
   height: auto;
   border-radius: 50%;
+  margin-right: 50px;
+}
+
+.about-text {
+
+}
+
+/* Portfolio */
+#portfolio {
+  margin-top: 45px;
+}
+
+.art-dimensions {
+  width: 500px;
+  height: auto;
+  margin: 25px;
 }
 
 /* Contact */
@@ -29,11 +63,84 @@
   margin-left: 15px;
   margin-right: 15px;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 25px;
   width: 40px;
   height: auto;
 }
-
 .socials:hover {
   filter: invert(64%) sepia(59%) saturate(275%) hue-rotate(314deg) brightness(100%) contrast(96%);;
+}
+
+@media screen and (max-width: 1280px) {
+  /* About */
+  .profile-avatar {
+    width: 250px;
+    height: auto;
+    margin-left: 35px;
+    margin-right: 5px;
+  }
+
+  .about-text {
+    margin-top: 100px;
+    margin-right: 40px;
+  }
+
+  /* Portfolio */
+  #portfolio {
+    margin-top: 25px;
+  }
+
+  .art-dimensions {
+    width: 350px;
+    margin: 20px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  /* About */
+  .profile-avatar {
+    width: 250px;
+    height: auto;
+    margin-left: 30px;
+    margin-right: 5px;
+  }
+
+  .about-text {
+    margin-top: 100px;
+    margin-right: 35px;
+  }
+
+  /* Portfolio */
+  #portfolio {
+    margin-top: 25px;
+  }
+
+  .art-dimensions {
+    width: 330px;
+    margin: 15px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  /* About */
+  .profile-avatar {
+    width: 160px;
+    height: auto;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+
+  .about-text {
+    margin-top: 100px;
+  }
+
+  /* Portfolio */
+  #portfolio {
+    margin-top: 25px;
+  }
+
+  .art-dimensions {
+    width: 175px;
+    margin: 4px;
+  }
 }
