@@ -17,6 +17,14 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.body-text {
+  font-size: 18px;
+}
+
+.bold-text {
+  font-weight: 500;
+}
+
 /* Navbar */
 #navbar {
   margin-top: 20px;
@@ -28,23 +36,41 @@
 
 .nav-items {
   margin-right: 5%;
+  font-size: 22px;
 }
 
 /* About */
 #about {
   display: inline-flex;
   margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rays {
+  width: 260px;
+  height: auto;
+  transform: rotate(-9deg) translateX(105px) translateY(-50px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profile-avatar {
   width: 300px;
   height: auto;
   border-radius: 50%;
-  margin-right: 50px;
+  margin-left: auto;
+  margin-right: 40px;
 }
 
 .about-text {
-
+  color: #715959;
+  font-size: 28px;
+  width: 750px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: 280px;
+  margin-top: 15px;
 }
 
 /* Portfolio */
@@ -81,16 +107,33 @@
 
 @media screen and (max-width: 1280px) {
   /* About */
+  #about {
+    display: inline-flex;
+    margin-top: 20px;
+  }
+  
+  .rays {
+    width: 140px;
+    height: auto;
+    transform: rotate(-3deg) translateX(55px) translateY(-25px);
+  }
+  
   .profile-avatar {
     width: 250px;
     height: auto;
-    margin-left: 35px;
-    margin-right: 5px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 20px;
   }
-
+  
   .about-text {
-    margin-top: 100px;
-    margin-right: 40px;
+    color: #715959;
+    font-size: 16px;
+    width: 350px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: 140px;
+    margin-top: 25px;
   }
 
   /* Portfolio */
@@ -106,16 +149,33 @@
 
 @media screen and (max-width: 992px) {
   /* About */
-  .profile-avatar {
-    width: 250px;
-    height: auto;
-    margin-left: 30px;
-    margin-right: 5px;
+  #about {
+    display: inline-flex;
+    margin-top: 20px;
   }
-
+  
+  .rays {
+    width: 140px;
+    height: auto;
+    transform: rotate(-3deg) translateX(55px) translateY(-25px);
+  }
+  
+  .profile-avatar {
+    width: 220px;
+    height: auto;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 20px;
+  }
+  
   .about-text {
-    margin-top: 100px;
-    margin-right: 35px;
+    color: #715959;
+    font-size: 16px;
+    width: 350px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: 145px;
+    margin-top: 15px;
   }
 
   /* Portfolio */
@@ -131,20 +191,40 @@
 
 @media screen and (max-width: 550px) {
   /* About */
+  #about {
+    display: inline-block;
+    margin-top: -35px;
+  }
+  
+  .rays {
+    width: 100px;
+    height: auto;
+    transform: rotate(-1deg) translateX(-80px) translateY(35px);
+    /* margin-left: auto;
+    margin-right: auto; */
+  }
+  
   .profile-avatar {
     width: 160px;
     height: auto;
-    margin-left: 15px;
-    margin-right: 5px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
-
+  
   .about-text {
-    margin-top: 100px;
+    color: #715959;
+    font-size: 16px;
+    width: 350px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
   }
 
   /* Portfolio */
   #portfolio {
-    margin-top: 25px;
+    margin-top: 10px;
   }
 
   .art-dimensions {

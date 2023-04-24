@@ -7,6 +7,7 @@ import Paleta from '../assets/art/paleta-payaso.png';
 import Bump from '../assets/art/bump.png';
 import Fresas from '../assets/art/fresas.png';
 import Cake from '../assets/art/cake.jpg';
+import Conchita from '../assets/art/conchita.png';
 
 function Portfolio() {
   const [conchaShow, setConchaShow] = useState(false);
@@ -14,7 +15,7 @@ function Portfolio() {
   const [fresasShow, setFresasShow] = useState(false);
   const [bumpShow, setBumpShow] = useState(false);
   const [cakeShow, setCakeShow] = useState(false);
-
+  const [conchitaShow, setConchitaShow] = useState(false);
 
   return (
     <div id="portfolio">
@@ -24,6 +25,7 @@ function Portfolio() {
         <img src={Fresas} alt="" className="art art-dimensions box-shadow" onClick={() => setFresasShow(true)}/>
         <img src={Bump} alt="" className="art art-dimensions box-shadow" onClick={() => setBumpShow(true)}/>
         <img src={Cake} alt="" className="art art-dimensions box-shadow" onClick={() => setCakeShow(true)}/>
+        <img src={Conchita} alt="" className="art art-dimensions box-shadow" onClick={() => setConchitaShow(true)}/>
       </div>
       
       {/* Art modals to show larger image when clicked */}
@@ -41,6 +43,9 @@ function Portfolio() {
       </Modal>
       <Modal className="art-modals" size="lg" show={cakeShow} onHide={() => setCakeShow(false)} aria-labelledby="example-modal-sizes-title-lg" centered>
         <img src={Cake}/>
+      </Modal>
+      <Modal className="art-modals" size="lg" show={conchitaShow} onHide={() => setConchitaShow(false)} aria-labelledby="example-modal-sizes-title-lg" centered>
+        <img src={Conchita}/>
       </Modal>
     </div>
   )

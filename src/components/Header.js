@@ -8,7 +8,6 @@ import Navbar from 'react-bootstrap/Navbar';
 function Header() {
   return (
     <Navbar id="navbar" bg="#F3CFC6" expand="lg">
-      {/* <Container> */}
         <Navbar.Brand href="#about" id="nav-brand">DaGibby</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="nav-items"/>
         <Navbar.Collapse id="basic-navbar-nav">
@@ -19,7 +18,6 @@ function Header() {
             <Nav.Link href="#contact">Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      {/* </Container> */}
     </Navbar>
   )
 }
