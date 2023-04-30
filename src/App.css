@@ -224,11 +224,16 @@
 
   /* Portfolio */
   #portfolio {
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
   .art-dimensions {
     width: 175px;
     margin: 4px;
+  }
+
+  /* Contact */
+  .socials {
+    margin-top: 30px;
   }
 }
