@@ -197,9 +197,9 @@
   }
   
   .rays {
-    width: 100px;
+    width: 110px;
     height: auto;
-    transform: rotate(-1deg) translateX(-80px) translateY(35px);
+    transform: rotate(1deg) translateX(-80px) translateY(30px);
     /* margin-left: auto;
     margin-right: auto; */
   }
