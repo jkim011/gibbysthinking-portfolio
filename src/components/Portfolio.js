@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 
 import Concha from '../assets/art/concha.png';
 import Paleta from '../assets/art/paleta-payaso.png';
-import Bump from '../assets/art/bump.png';
 import BumpBlue from '../assets/art/bumpBlue.png';
 import Fresas from '../assets/art/fresas.png';
 import Cake from '../assets/art/cake.jpg';
