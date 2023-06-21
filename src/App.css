@@ -190,6 +190,12 @@
 }
 
 @media screen and (max-width: 550px) {
+  /* Header */
+  .nav-items {
+    margin-right: 5%;
+    font-size: 18px;
+  }
+  
   /* About */
   #about {
     display: inline-block;
