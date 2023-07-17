@@ -11,10 +11,10 @@ function Contact() {
         <a href="https://www.instagram.com/gibbysthinking/" target="_blank" rel="noreferrer"><img className="socials" src={IgIcon}/></a>
         <a href="" target="_blank" rel="noreferrer"><img className="socials" src={TiktokIconShape}/></a>
         <a href="" target="_blank" rel="noreferrer"><img className="socials" src={TwitterIcon}/></a>
-        <a href="mailto:" target="_blank" rel="noreferrer"><img className="socials" src={EmailIcon}/></a>
+        <a href="mailto: gabbypduran@gmail.com" target="_blank" rel="noreferrer"><img className="socials" src={EmailIcon}/></a>
       </div>
       <div style={{marginTop:"10px", marginBottom:"15px"}}>
-        <p className="body-text bold-text">Art by Gabrielle Duran</p>
+        <p className="body-text bold-text">All Art by Gabrielle Duran</p>
       </div>
     </div>
   )
