@@ -8,6 +8,7 @@ import BumpBlue from '../assets/art/bumpBlue.png';
 import Fresas from '../assets/art/fresas.png';
 import Cake from '../assets/art/cake.jpg';
 import Conchita from '../assets/art/conchita.png';
+import FruitSando from '../assets/art/fruit-sando.png';
 
 function Portfolio() {
   const [conchaShow, setConchaShow] = useState(false);
@@ -16,6 +17,7 @@ function Portfolio() {
   const [bumpBlueShow, setBumpBlueShow] = useState(false);
   const [cakeShow, setCakeShow] = useState(false);
   const [conchitaShow, setConchitaShow] = useState(false);
+  const [fruitSandoShow, setFruitSandoShow] = useState(false);
 
   return (
     <div id="portfolio">
@@ -24,8 +26,9 @@ function Portfolio() {
         <img src={Paleta} alt="" className="art art-dimensions box-shadow" onClick={() => setPaletaShow(true)}/>
         <img src={Fresas} alt="" className="art art-dimensions box-shadow" onClick={() => setFresasShow(true)}/>
         <img src={BumpBlue} alt="" className="art art-dimensions box-shadow" onClick={() => setBumpBlueShow(true)}/>
-        <img src={Cake} alt="" className="art art-dimensions box-shadow" onClick={() => setCakeShow(true)}/>
+        <img src={Cake} alt="" className="art art-dimensions box-shadow" onClick={() => setCakeShow(true)}/>       
         <img src={Conchita} alt="" className="art art-dimensions box-shadow" onClick={() => setConchitaShow(true)}/>
+        <img src={FruitSando} alt="" className="art art-dimensions box-shadow" onClick={() => setFruitSandoShow(true)}/>
       </div>
       
       {/* Art modals to show larger image when clicked */}
@@ -46,6 +49,9 @@ function Portfolio() {
       </Modal>
       <Modal className="art-modals" size="lg" show={conchitaShow} onHide={() => setConchitaShow(false)} aria-labelledby="example-modal-sizes-title-lg" centered>
         <img src={Conchita}/>
+      </Modal>
+      <Modal className="art-modals" size="lg" show={fruitSandoShow} onHide={() => setFruitSandoShow(false)} aria-labelledby="example-modal-sizes-title-lg" centered>
+        <img src={FruitSando}/>
       </Modal>
     </div>
   )
