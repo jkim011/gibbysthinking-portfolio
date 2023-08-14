@@ -22,13 +22,13 @@ function Portfolio() {
   return (
     <div id="portfolio">
       <div className="art-section">
-        <img src={Concha} alt="" className="art art-dimensions box-shadow" onClick={() => setConchaShow(true)}/>
-        <img src={Paleta} alt="" className="art art-dimensions box-shadow" onClick={() => setPaletaShow(true)}/>
-        <img src={Fresas} alt="" className="art art-dimensions box-shadow" onClick={() => setFresasShow(true)}/>
-        <img src={BumpBlue} alt="" className="art art-dimensions box-shadow" onClick={() => setBumpBlueShow(true)}/>
-        <img src={Cake} alt="" className="art art-dimensions box-shadow" onClick={() => setCakeShow(true)}/>       
-        <img src={Conchita} alt="" className="art art-dimensions box-shadow" onClick={() => setConchitaShow(true)}/>
-        <img src={FruitSando} alt="" className="art art-dimensions box-shadow" onClick={() => setFruitSandoShow(true)}/>
+        <img src={Concha} alt="concha" className="art art-dimensions box-shadow" onClick={() => setConchaShow(true)}/>
+        <img src={Paleta} alt="paleta" className="art art-dimensions box-shadow" onClick={() => setPaletaShow(true)}/>
+        <img src={Fresas} alt="fresas" className="art art-dimensions box-shadow" onClick={() => setFresasShow(true)}/>
+        <img src={BumpBlue} alt="bump blue" className="art art-dimensions box-shadow" onClick={() => setBumpBlueShow(true)}/>
+        <img src={Cake} alt="cake" className="art art-dimensions box-shadow" onClick={() => setCakeShow(true)}/>       
+        <img src={Conchita} alt="conchita" className="art art-dimensions box-shadow" onClick={() => setConchitaShow(true)}/>
+        <img src={FruitSando} alt="fruit sando" className="art art-dimensions box-shadow" onClick={() => setFruitSandoShow(true)}/>
       </div>
       
       {/* Art modals to show larger image when clicked */}
