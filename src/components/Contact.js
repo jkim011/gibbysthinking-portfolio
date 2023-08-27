@@ -14,7 +14,7 @@ function Contact() {
         <a href="mailto: gabbypduran@gmail.com" target="_blank" rel="noreferrer"><img className="socials" src={EmailIcon}/></a>
       </div>
       <div style={{marginTop:"10px", marginBottom:"15px"}}>
-        <p className="body-text bold-text">All Art by Gabrielle Duran</p>
+        <p className="body-text bold-text">Art by Gabrielle Duran</p>
       </div>
     </div>
   )
