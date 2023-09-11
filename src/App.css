@@ -79,11 +79,12 @@
 }
 
 .art {
-  transition: .3s ease;
+  transition: .2s;
 }
 .art:hover {
   cursor: pointer;
   box-shadow: none;
+  border: #F3CFC6 2px solid;
 }
 
 .art-dimensions {
