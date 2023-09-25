@@ -9,6 +9,7 @@ import Fresas from '../assets/art/fresas.png';
 import Cake from '../assets/art/cake.jpg';
 import Conchita from '../assets/art/conchita.png';
 import FruitSando from '../assets/art/fruit-sando.png';
+import CroissantMantaRay from '../assets/art/croissant-manta-ray.png';
 
 function Portfolio() {
   const [conchaShow, setConchaShow] = useState(false);
@@ -18,6 +19,7 @@ function Portfolio() {
   const [cakeShow, setCakeShow] = useState(false);
   const [conchitaShow, setConchitaShow] = useState(false);
   const [fruitSandoShow, setFruitSandoShow] = useState(false);
+  const [croissantMantaRayShow, setCroissantMantaRayShow] = useState(false);
 
   return (
     <div id="portfolio">
@@ -29,6 +31,7 @@ function Portfolio() {
         <img src={Cake} alt="cake" className="art art-dimensions box-shadow" onClick={() => setCakeShow(true)}/>       
         <img src={Conchita} alt="conchita" className="art art-dimensions box-shadow" onClick={() => setConchitaShow(true)}/>
         <img src={FruitSando} alt="fruit sando" className="art art-dimensions box-shadow" onClick={() => setFruitSandoShow(true)}/>
+        <img src={CroissantMantaRay} alt="croissant manta ray" className="art art-dimensions box-shadow" onClick={() => setCroissantMantaRayShow(true)}/>
       </div>
       
       {/* Art modals to show larger image when clicked */}
@@ -52,6 +55,9 @@ function Portfolio() {
       </Modal>
       <Modal className="art-modals" size="lg" show={fruitSandoShow} onHide={() => setFruitSandoShow(false)} aria-labelledby="example-modal-sizes-title-lg" centered>
         <img src={FruitSando}/>
+      </Modal>
+      <Modal className="art-modals" size="lg" show={croissantMantaRayShow} onHide={() => setCroissantMantaRayShow(false)} aria-labelledby="example-modal-sizes-title-lg" centered>
+        <img src={CroissantMantaRay}/>
       </Modal>
     </div>
   )
