@@ -11,6 +11,7 @@ import FruitSando from '../assets/art/fruit-sando.png';
 import CroissantMantaRay from '../assets/art/croissant-manta-ray.png';
 
 function Portfolio() {
+  // set function to map thru so code is cleaner, eventually be able to have user add in artwork themself
   const [conchaShow, setConchaShow] = useState(false);
   const [paletaShow, setPaletaShow] = useState(false);
   const [fresasShow, setFresasShow] = useState(false);
