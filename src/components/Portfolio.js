@@ -10,6 +10,7 @@ import Conchita from '../assets/art/conchita.png';
 import FruitSando from '../assets/art/fruit-sando.png';
 import CroissantMantaRay from '../assets/art/croissant-manta-ray.png';
 
+//Add form for client to be able to add images themselves
 const artworks = [
   { name: 'Concha', src: Concha },
   { name: 'Paleta', src: Paleta },
