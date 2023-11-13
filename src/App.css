@@ -200,13 +200,13 @@
   /* About */
   #about {
     display: inline-block;
-    margin-top: -35px;
+    margin-top: -45px;
   }
   
   .rays {
-    width: 110px;
+    width: 100px;
     height: auto;
-    transform: rotate(1deg) translateX(-80px) translateY(30px);
+    transform: rotate(2deg) translateX(-75px) translateY(35px);
   }
   
   .profile-avatar {
