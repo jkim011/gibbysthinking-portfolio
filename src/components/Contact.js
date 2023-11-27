@@ -3,7 +3,7 @@ import IgIcon from '../assets/icons/ig-icon-darker.png';
 import TwitterIcon from '../assets/icons/twitter-icon-darker.png';
 import EmailIcon from '../assets/icons/email-icon-darker.png';
 import TiktokIconShape from '../assets/icons/tiktok-icon-shape.png';
-
+// Possibly add form for ppl to request something custom
 function Contact() {
   return (
     <div id="contact">
