@@ -65,12 +65,12 @@
 
 .about-text {
   color: #715959;
-  font-size: 26px;
+  font-size: 22px;
   width: 750px;
   text-align: left;
   margin-left: auto;
   margin-right: 280px;
-  margin-top: 15px;
+  margin-top: 55px;
 }
 
 /* Portfolio */
@@ -84,7 +84,7 @@
 .art:hover {
   cursor: pointer;
   box-shadow: none;
-  border: #F3CFC6 2px solid;
+  /* border: #F3CFC6 2px solid; */
 }
 
 .art-dimensions {
@@ -99,7 +99,7 @@
   margin-right: 15px;
   margin-bottom: 20px;
   margin-top: 25px;
-  width: 40px;
+  width: 35px;
   height: auto;
 }
 .socials:hover {

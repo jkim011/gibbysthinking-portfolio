@@ -9,6 +9,7 @@ import Cake from '../assets/art/cake.jpg';
 import Conchita from '../assets/art/conchita.png';
 import FruitSando from '../assets/art/fruit-sando.png';
 import CroissantMantaRay from '../assets/art/croissant-manta-ray.png';
+import StrawberryFrenchToast from '../assets/art/strawberry-french-toast.png';
 
 //Add form for client to be able to add images themselves
 const artworks = [
@@ -20,6 +21,7 @@ const artworks = [
   { name: 'Conchita', src: Conchita },
   { name: 'FruitSando', src: FruitSando },
   { name: 'CroissantMantaRay', src: CroissantMantaRay },
+  { name: 'StrawberryFrenchToast', src: StrawberryFrenchToast },
 ];
 
 function Portfolio() {
