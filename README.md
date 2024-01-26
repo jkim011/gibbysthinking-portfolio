@@ -13,4 +13,4 @@ Please contact me using the following links:
 
   - **Email:** [jaredkim011@gmail.com](mailto:jaredkim011@gmail.com)
 
-  - **LinkedIn:** [https://www.linkedin.com/in/jared-kim/](https://www.linkedin.com/in/jared-kim/)
+  - **LinkedIn:** [https://www.linkedin.com/in/jaredkim011/](https://www.linkedin.com/in/jaredkim011/)
