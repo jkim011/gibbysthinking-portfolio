@@ -11,7 +11,7 @@ import FruitSando from '../assets/art/fruit-sando.png';
 import CroissantMantaRay from '../assets/art/croissant-manta-ray.png';
 import StrawberryFrenchToast from '../assets/art/strawberry-french-toast.png';
 
-//Add form for client to be able to add images themselves
+
 const artworks = [
   { name: 'Concha', src: Concha },
   { name: 'Paleta', src: Paleta },
@@ -27,6 +27,17 @@ const artworks = [
 function Portfolio() {
   const [showModal, setShowModal] = useState({});
 
+  const [files, setFiles] = useState([]);
+
+  function handleAddImage(e) {
+    const selectedFiles = e.target.files;
+    const fileUrls = Array.from(selectedFiles).map(file =>
+        URL.createObjectURL(file)
+    );
+
+    setFiles(prevFiles => [...prevFiles, ...fileUrls]);
+  }
+
   const toggleModal = (artworkName) => {
     setShowModal((prevShowModal) => ({
       ...prevShowModal,
@@ -36,7 +47,7 @@ function Portfolio() {
 
   return (
     <div id="portfolio">
-      <div className="art-section">
+      {/* <div className="art-section">
         {artworks.map((artwork) => 
           <img
             key={artwork.name}
@@ -60,7 +71,32 @@ function Portfolio() {
         >
           <img src={artwork.src} alt={artwork.name} />
         </Modal>
-      )}
+      )} */}
+
+      <h2>Add Images:</h2>
+      <input type="file" onChange={handleAddImage} multiple />
+      
+      <div>
+        <div className="art-section">
+          {files.map((file, index) => (
+              <img key={index} src={file} alt={`Image ${index + 1}`} className="art art-dimensions box-shadow" onClick={() => toggleModal(index)}/>
+          ))}
+        </div>
+
+        {files.map((file, index) => (
+          <Modal
+            key={index}
+            className="art-modals"
+            size="lg"
+            show={showModal[index]}
+            onHide={() => toggleModal(index)}
+            aria-labelledby="example-modal-sizes-title-lg"
+            centered
+          >
+            <img src={file} alt={index} />
+          </Modal>
+        ))}
+      </div>
     </div>
   );
 }
