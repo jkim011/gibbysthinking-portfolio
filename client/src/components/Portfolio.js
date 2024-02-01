@@ -1,58 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
-
-import Concha from '../assets/art/concha.png';
-import Paleta from '../assets/art/paleta-payaso.png';
-import BumpBlue from '../assets/art/bumpBlue.png';
-import Fresas from '../assets/art/fresas.png';
-import Cake from '../assets/art/cake.jpg';
-import Conchita from '../assets/art/conchita.png';
-import FruitSando from '../assets/art/fruit-sando.png';
-import CroissantMantaRay from '../assets/art/croissant-manta-ray.png';
-import StrawberryFrenchToast from '../assets/art/strawberry-french-toast.png';
-
-const artworks = [
-  { name: 'Concha', src: Concha },
-  { name: 'Paleta', src: Paleta },
-  { name: 'Fresas', src: Fresas },
-  { name: 'BumpBlue', src: BumpBlue },
-  { name: 'Cake', src: Cake },
-  { name: 'Conchita', src: Conchita },
-  { name: 'FruitSando', src: FruitSando },
-  { name: 'CroissantMantaRay', src: CroissantMantaRay },
-  { name: 'StrawberryFrenchToast', src: StrawberryFrenchToast },
-];
 
 function Portfolio() {
   const [showModal, setShowModal] = useState({});
 
-  const [files, setFiles] = useState([]);
+  const [image, setImage] = useState();
+  const [allImages, setAllImages] = useState();
 
-  const handleAddImageChange = (e) => {
-    const selectedFiles = e.target.files;
-    const fileUrls = Array.from(selectedFiles).map(file =>
-        URL.createObjectURL(file)
-    );
-    setFiles(prevFiles => [...prevFiles, ...fileUrls]);
+  useEffect(() => {
+    getImage();
+  },[])
+  const submitImage = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const result = await axios.post(
+      "http://localhost:3001/upload",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    )
   }
 
-  const handleAddImage = async () => {
-    const formData = new FormData();
+  const handleChange = (e) => {
+    const selectedImages = e.target.files[0];
+    console.log(selectedImages, "files from handle change")
+    setImage(selectedImages);
+  }
 
-      for (let i = 0; i < files.length; i++) {
-          formData.append("images", files[i]);
-      }
-
-      try {
-          const response = await axios.post("http://localhost:3001/upload", formData);
-
-          console.log(response.data);
-
-          setFiles(response.data);
-      } catch (error) {
-          console.error("Error uploading images:", error);
-      }
+  const getImage = async () => {
+    const result = await axios.get("http://localhost:3001/get-image");
+    console.log(result)
+    setAllImages(result.data.data);
   }
 
   const toggleModal = (artworkName) => {
@@ -64,56 +46,40 @@ function Portfolio() {
 
   return (
     <div id="portfolio">
-      {/* <div className="art-section">
-        {artworks.map((artwork) => 
-          <img
-            key={artwork.name}
-            src={artwork.src}
-            alt={artwork.name}
-            className="art art-dimensions box-shadow"
-            onClick={() => toggleModal(artwork.name)}
-          />
-          )}
-      </div>
-
-      {artworks.map((artwork) => 
-        <Modal
-          key={artwork.name}
-          className="art-modals"
-          size="lg"
-          show={showModal[artwork.name]}
-          onHide={() => toggleModal(artwork.name)}
-          aria-labelledby="example-modal-sizes-title-lg"
-          centered
-        >
-          <img src={artwork.src} alt={artwork.name} />
-        </Modal>
-      )} */}
-
-      <h2>Add Images:</h2>
-      <input type="file" onChange={handleAddImageChange} multiple />
-      <button onClick={handleAddImage}>Upload</button>
+      <h3>Add Artwork:</h3>
+      <form onSubmit={submitImage}>
+        <input type="file" onChange={handleChange} multiple />
+        <button>Upload</button>
+      </form>
       
       <div>
         <div className="art-section">
-          {files.map((file, index) => (
-              <img key={index} src={file} alt={`Image ${index + 1}`} className="art art-dimensions box-shadow" onClick={() => toggleModal(index)}/>
-          ))}
+          {allImages == null 
+            ? "" 
+            : allImages.map((data) => {
+              return <img 
+                        src={require(`../assets/art/${data.image}`)}
+                        className="art art-dimensions box-shadow"
+                        onClick={() => toggleModal(data.id)}
+                      />
+            })}
         </div>
-
-        {files.map((file, index) => (
-          <Modal
-            key={index}
-            className="art-modals"
-            size="lg"
-            show={showModal[index]}
-            onHide={() => toggleModal(index)}
-            aria-labelledby="example-modal-sizes-title-lg"
-            centered
-          >
-            <img src={file} alt={index} />
-          </Modal>
-        ))}
+        
+        {allImages == null 
+          ? "" 
+          : allImages.map((data) => {
+            return <Modal
+                      key={data.id}
+                      className="art-modals"
+                      size="lg"
+                      show={showModal[data.id]}
+                      onHide={() => toggleModal(data.id)}
+                      aria-labelledby="example-modal-sizes-title-lg"
+                      centered
+                    >
+                      <img src={require(`../assets/art/${data.image}`)} alt={data.id} />
+                    </Modal>
+          })}
       </div>
     </div>
   );
