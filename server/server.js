@@ -41,6 +41,8 @@ app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 // });
 
+
+////// For image uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, '../client/src/assets/art/')

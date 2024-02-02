@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
 //////////// TODO: add user model for login and put conditions on submitImage
+//////////////// SET UP MVC
 ////////////       find a way for mongodb data to be rearranged incase art work needs to be switched around
 ////////////       add delete function for data 
 ////////////       add contact section 
