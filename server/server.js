@@ -25,7 +25,7 @@ mongoose.connect("mongodb://localhost:27017/gibbysthinking_db", {
   })
 
 require("../server/models/ImageModel");
-const Images = mongoose.model("imageModel")
+const Images = mongoose.model("imageModel");
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {

@@ -61,28 +61,28 @@ function Portfolio() {
         <div className="art-section">
           {allImages == null 
             ? "" 
-            : allImages.map((data) => {
+            : allImages.map((data, index) => {
               return <img 
                         src={require(`../assets/art/${data.image}`)}
                         className="art art-dimensions box-shadow"
-                        onClick={() => toggleModal(data.id)}
+                        onClick={() => toggleModal(index)}
                       />
             })}
         </div>
         
         {allImages == null 
           ? "" 
-          : allImages.map((data) => {
+          : allImages.map((data, index) => {
             return <Modal
-                      key={data.id}
+                      key={index}
                       className="art-modals"
                       size="lg"
-                      show={showModal[data.id]}
-                      onHide={() => toggleModal(data.id)}
+                      show={showModal[index]}
+                      onHide={() => toggleModal(index)}
                       aria-labelledby="example-modal-sizes-title-lg"
                       centered
                     >
-                      <img src={require(`../assets/art/${data.image}`)} alt={data.id} />
+                      <img src={require(`../assets/art/${data.image}`)} alt={index} />
                     </Modal>
           })}
       </div>
