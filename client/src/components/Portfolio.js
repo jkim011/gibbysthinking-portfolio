@@ -38,7 +38,7 @@ function Portfolio() {
 
   const getImage = async () => {
     const result = await axios.get("/api/image/get-image");
-    console.log(result)
+    console.log(result, "getImage")
     setAllImages(result.data.data);
   }
 

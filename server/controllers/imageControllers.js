@@ -1,7 +1,4 @@
-const mongoose = require("mongoose");
-require("../models/ImageModel");
-const Images = mongoose.model("imageModel");
-
+const Images = require("../models/ImageModel");
 
 const uploadImage = async (req, res) => {
   console.log(req.body);
