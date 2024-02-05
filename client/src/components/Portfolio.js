@@ -3,7 +3,6 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
 //////////// TODO: add user model for login and put conditions on submitImage
-//////////////// SET UP MVC
 ////////////       find a way for mongodb data to be rearranged incase art work needs to be switched around
 ////////////       add delete function for data 
 ////////////       add contact section 
@@ -23,7 +22,7 @@ function Portfolio() {
     formData.append("image", image);
 
     const result = await axios.post(
-      "http://localhost:3001/upload",
+      "/api/image/upload-image",
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -38,7 +37,7 @@ function Portfolio() {
   }
 
   const getImage = async () => {
-    const result = await axios.get("http://localhost:3001/get-image");
+    const result = await axios.get("/api/image/get-image");
     console.log(result)
     setAllImages(result.data.data);
   }
@@ -64,7 +63,9 @@ function Portfolio() {
             ? "" 
             : allImages.map((data, index) => {
               return <img 
+                        key={index}
                         src={require(`../assets/art/${data.image}`)}
+                        alt={index}
                         className="art art-dimensions box-shadow"
                         onClick={() => toggleModal(index)}
                       />
