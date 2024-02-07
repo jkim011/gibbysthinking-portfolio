@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
+import Auth from '../utils/auth';
 
 //////////// TODO: add user model for login and put conditions on submitImage
 ////////////       find a way for mongodb data to be rearranged incase art work needs to be switched around
@@ -48,14 +49,38 @@ function Portfolio() {
       [artworkName]: !prevShowModal[artworkName],
     }));
   };
+if(Auth.loggedIn ) {
+  console.log("logged in")
+} else {
+  console.log("not logged in")
+}
+
+const adminLoggedIn = () => {
+  const user = JSON.stringify(Auth.getProfile("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7fSwiaWF0IjoxNzA3MjY2NzYwLCJleHAiOjE3MDcyNzM5NjB9._p4fP1VrAiaFrpl2vWC3-0p96gDT-B7S9IgwNUlPr8U"))
+  // if(user.isAdmin == true) {
+  //   return true
+  // } else {
+  //   return false
+  // }
+  console.log(user)
+}
+// const adminIsLoggedIn = adminLoggedIn();
+adminLoggedIn();
 
   return (
     <div id="portfolio">
-      <h3>Add Artwork:</h3>
-      <form onSubmit={submitImage}>
-        <input type="file" onChange={handleChange} multiple />
-        <button>Upload</button>
-      </form>
+      {/* {adminIsLoggedIn == true ? ( */}
+        <div>
+          <h3>Add Artwork:</h3>
+          <form onSubmit={submitImage}>
+            <input type="file" onChange={handleChange} multiple />
+            <button>Upload</button>
+          </form>
+        </div>
+      {/* ) : (
+        <div></div>
+      )} */}
+      
       
       <div>
         <div className="art-section">
