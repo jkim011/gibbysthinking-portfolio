@@ -34,13 +34,11 @@ function Portfolio() {
 
   const handleChange = (e) => {
     const selectedImages = e.target.files[0];
-    console.log(selectedImages, "files from handle change")
     setImage(selectedImages);
   }
 
   const getImage = async () => {
     const result = await axios.get("/api/image/get-image");
-    console.log(result.data.data, "getImage")
     setAllImages(result.data.data);
   }
 
@@ -91,10 +89,8 @@ function Portfolio() {
     const adminLoggedIn = () => {
       const user = Auth.getProfile().data
       if(user.isAdmin === true) {
-        console.log("Admin is logged in")
         return true
       } else if(user.isAdmin === false) {
-        console.log("Admin is not logged in")
         return false
       }
     }
