@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Auth from '../utils/auth';
+import { jwtDecode } from 'jwt-decode';
 
-//////////// TODO: add user model for login and put conditions on submitImage
+//////////// TODO: put conditions on submitImage
 ////////////       find a way for mongodb data to be rearranged incase art work needs to be switched around
 ////////////       add delete function for data 
 ////////////       add contact section 
@@ -39,7 +40,7 @@ function Portfolio() {
 
   const getImage = async () => {
     const result = await axios.get("/api/image/get-image");
-    console.log(result, "getImage")
+    console.log(result.data.data, "getImage")
     setAllImages(result.data.data);
   }
 
@@ -49,72 +50,104 @@ function Portfolio() {
       [artworkName]: !prevShowModal[artworkName],
     }));
   };
-if(Auth.loggedIn ) {
-  console.log("logged in")
-} else {
-  console.log("not logged in")
-}
-
-const adminLoggedIn = () => {
-  const user = JSON.stringify(Auth.getProfile("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7fSwiaWF0IjoxNzA3MjY2NzYwLCJleHAiOjE3MDcyNzM5NjB9._p4fP1VrAiaFrpl2vWC3-0p96gDT-B7S9IgwNUlPr8U"))
-  // if(user.isAdmin == true) {
-  //   return true
-  // } else {
-  //   return false
-  // }
-  console.log(user)
-}
-// const adminIsLoggedIn = adminLoggedIn();
-adminLoggedIn();
-
-  return (
-    <div id="portfolio">
-      {/* {adminIsLoggedIn == true ? ( */}
+  
+  if(!Auth.loggedIn() ) { 
+    return (
+      <div id="portfolio">      
         <div>
-          <h3>Add Artwork:</h3>
-          <form onSubmit={submitImage}>
-            <input type="file" onChange={handleChange} multiple />
-            <button>Upload</button>
-          </form>
-        </div>
-      {/* ) : (
-        <div></div>
-      )} */}
-      
-      
-      <div>
-        <div className="art-section">
+          <div className="art-section">
+            {allImages == null ? "" 
+              : 
+                allImages.map((data, index) => {
+                return <img 
+                          key={index}
+                          src={require(`../assets/art/${data.image}`)}
+                          alt={index}
+                          className="art art-dimensions box-shadow"
+                          onClick={() => toggleModal(index)}
+                        />
+              })}
+          </div>
+          
           {allImages == null 
             ? "" 
             : allImages.map((data, index) => {
-              return <img 
+              return <Modal
                         key={index}
-                        src={require(`../assets/art/${data.image}`)}
-                        alt={index}
-                        className="art art-dimensions box-shadow"
-                        onClick={() => toggleModal(index)}
-                      />
+                        className="art-modals"
+                        size="lg"
+                        show={showModal[index]}
+                        onHide={() => toggleModal(index)}
+                        aria-labelledby="example-modal-sizes-title-lg"
+                        centered
+                      >
+                        <img src={require(`../assets/art/${data.image}`)} alt={index} />
+                      </Modal>
             })}
         </div>
-        
-        {allImages == null 
-          ? "" 
-          : allImages.map((data, index) => {
-            return <Modal
-                      key={index}
-                      className="art-modals"
-                      size="lg"
-                      show={showModal[index]}
-                      onHide={() => toggleModal(index)}
-                      aria-labelledby="example-modal-sizes-title-lg"
-                      centered
-                    >
-                      <img src={require(`../assets/art/${data.image}`)} alt={index} />
-                    </Modal>
-          })}
       </div>
-    </div>
-  );
+    )
+  } else {
+    const adminLoggedIn = () => {
+      const user = Auth.getProfile().data
+      if(user.isAdmin === true) {
+        console.log("Admin is logged in")
+        return true
+      } else if(user.isAdmin === false) {
+        console.log("Admin is not logged in")
+        return false
+      }
+    }
+    const adminIsLoggedIn = adminLoggedIn();
+  
+    return (
+      <div id="portfolio">
+        {adminIsLoggedIn == true ? (
+          <div>
+            <h3>Add Artwork:</h3>
+            <form onSubmit={submitImage}>
+              <input type="file" onChange={handleChange} multiple />
+              <button>Upload</button>
+            </form>
+          </div>
+        ) : (
+          <div></div>
+        )} 
+              
+        <div>
+          <div className="art-section">
+            {allImages == null ? "" 
+              : 
+                allImages.map((data, index) => {
+                return <img 
+                          key={index}
+                          src={require(`../assets/art/${data.image}`)}
+                          alt={index}
+                          className="art art-dimensions box-shadow"
+                          onClick={() => toggleModal(index)}
+                        />
+              })}
+          </div>
+          
+          {allImages == null 
+            ? "" 
+            : allImages.map((data, index) => {
+              return <Modal
+                        key={index}
+                        className="art-modals"
+                        size="lg"
+                        show={showModal[index]}
+                        onHide={() => toggleModal(index)}
+                        aria-labelledby="example-modal-sizes-title-lg"
+                        centered
+                      >
+                        <img src={require(`../assets/art/${data.image}`)} alt={index} />
+                      </Modal>
+            })}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Portfolio;
