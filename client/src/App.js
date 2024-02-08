@@ -7,6 +7,7 @@ import Header from './page-sections/Header';
 import About from './page-sections/About';
 import Portfolio from './page-sections/Portfolio';
 import Contact from './page-sections/Contact';
+import Footer from './page-sections/Footer';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         
       </div>
       <Contact />
+      <Footer />
     </div>
   );
 }
