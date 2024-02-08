@@ -5,8 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function Header() {
   return (
-    <Navbar id="navbar" bg="#F3CFC6" expand="lg">
-        <Navbar.Brand href="#about" id="nav-brand">DaGibby</Navbar.Brand>
+    <Navbar id="navbar" bg="#F3CFC6" expand="lg" sticky="top">
+        <Navbar.Brand href="/" id="nav-brand">DaGibby</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="nav-items"/>
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto "></Nav>

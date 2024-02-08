@@ -34,7 +34,7 @@ const Login = () => {
 
   return (
     <div>
-      <p onClick={handleShow}>Admin login</p>
+      <p className="body-text bold-text mt-3">Art by <span onClick={handleShow} className="login">Gabrielle Duran</span></p>
       {Auth.loggedIn() ? (
         <button onClick={handleLogout}>Logout</button>
       ): (
