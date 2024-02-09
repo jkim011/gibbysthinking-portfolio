@@ -101,9 +101,9 @@ function Portfolio() {
         {adminIsLoggedIn == true ? (
           <div>
             <h3>Add Artwork:</h3>
-            <form onSubmit={submitImage}>
+            <form id="image-form" onSubmit={submitImage}>
               <input type="file" onChange={handleChange} multiple />
-              <button>Upload</button>
+              <button className="button-submit">Upload</button>
             </form>
           </div>
         ) : (
