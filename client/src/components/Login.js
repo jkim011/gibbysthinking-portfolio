@@ -36,7 +36,7 @@ const Login = () => {
     <div>
       <p className="body-text bold-text mt-3">Art by <span onClick={handleShow} className="login">Gabrielle Duran</span></p>
       {Auth.loggedIn() ? (
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout} className='button-cancel mb-3'>Logout</button>
       ): (
         <div></div>
       )}
@@ -47,26 +47,28 @@ const Login = () => {
         </Modal.Header>
         <form onSubmit={handleLogin} className=''>
         <Modal.Body>
+          <div className="d-flex flex-column align-items-center">
             <input 
+              className='mb-2 w-50'
               placeholder='username'
               name='username'
               type='username'
-              onChange={(e) => setValues({...values, username: e.target.value})
-            }
+              onChange={ (e) => setValues({...values, username: e.target.value}) }
             />
             <input 
-              placeholder='*******'
+              className='w-50'
+              placeholder='********'
               name='password'
               type='password'
-              onChange={(e) => setValues({...values, password: e.target.value})
-            }
+              onChange={ (e) => setValues({...values, password: e.target.value}) }
             />
+          </div>
         </Modal.Body>
         <Modal.Footer>
-            <button variant="secondary" onClick={handleClose}>
+            <button className="button-cancel" style={{borderRadius:"5px"}} onClick={handleClose}>
               Cancel
             </button>
-            <button variant="primary" type="submit" onClick={handleClose}>
+            <button className="button-submit" style={{borderRadius:"5px"}} type="submit" onClick={handleClose}>
               Login
             </button>
         </Modal.Footer>
