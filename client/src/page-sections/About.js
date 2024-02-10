@@ -8,7 +8,7 @@ function About() {
   return (
     <div id="about">
         <div>
-          <img src={Rays} className="rays"/> 
+          {/* <img src={Rays} className="rays"/>  */}
         </div>
         <div>
           <img src={GabbyAvatar} className="profile-avatar box-shadow"/> 
