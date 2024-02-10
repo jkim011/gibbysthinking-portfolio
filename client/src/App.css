@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  background-color: #F3CFC6;
+  /* background-color: #F3CFC6; */
+  background-color: #fff0f0;
 }
 
 .page-container {
@@ -59,12 +60,19 @@
 
 /* Navbar */
 #navbar {
-  margin-top: 20px;
-  background-color: #F3CFC6;
+  margin-top: 10px;
+  /* background-color: #F3CFC6; */
+  /* background-color: #fff0f0; */
+  height: 125px;
 }
 
 #nav-brand {
   margin-left: 5%;
+}
+
+#nav-logo {
+  width: 165px;
+  height: auto;
 }
 
 .nav-items {
@@ -73,7 +81,8 @@
 }
 
 .navbar-collapse {
-  background-color: #F3CFC6;
+  /* background-color: #F3CFC6; */
+  /* background-color: #fff0f0; */
   margin-top: 3px;
 }
 
@@ -83,6 +92,7 @@
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
+  scroll-margin-top: 110px;
 }
 
 .rays {
@@ -118,6 +128,7 @@
 
 #portfolio {
   margin-top: 45px;
+  scroll-margin-top: 50px;
 }
 
 .art {
@@ -282,6 +293,26 @@
 
 @media screen and (max-width: 550px) {
   /* Header */
+  #navbar {
+    margin-top: 0;
+    height: 90px;
+    /* background-color: #fff0f0; */
+  }
+
+  .navbar-collapse {
+    margin-top: 0;
+    background-color: #fff0f0;
+  }
+
+  #nav-brand {
+    margin-left: 1%;
+  }
+  
+  #nav-logo {
+    width: 90px;
+    height: auto;
+  }
+
   .nav-items {
     margin-right: 5%;
     font-size: 18px;
@@ -290,7 +321,8 @@
   /* About */
   #about {
     display: inline-block;
-    margin-top: -45px;
+    margin-top: -25px;
+    scroll-margin-top: 200px;
   }
   
   .rays {
@@ -320,6 +352,7 @@
   /* Portfolio */
   #portfolio {
     margin-top: 15px;
+    scroll-margin-top: 250px;
   }
 
   .art-dimensions {
@@ -329,6 +362,7 @@
 
   /* Contact */
   .socials {
+    width: 40px;
     margin-top: 30px;
   }
 }
@@ -369,5 +403,11 @@
   .art-dimensions {
     width: 125px;
     margin: 3px;
+  }
+
+  /* Contact */
+  .socials {
+    width: 35px;
+    height: auto;
   }
 }
