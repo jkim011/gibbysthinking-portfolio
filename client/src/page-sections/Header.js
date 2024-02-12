@@ -5,9 +5,13 @@ import Logo from '../assets/logo.png';
 
 function Header() {
   return (
-    <Navbar id="navbar" className="" bg="#F3CFC6" expand="lg" sticky="top" collapseOnSelect>
+    <Navbar id="navbar" bg="#F3CFC6" expand="lg" sticky="top" collapseOnSelect>
+      <div className="navbar-brand-container">
         <Navbar.Brand href="/" id="nav-brand"><img src={Logo} id="nav-logo"/></Navbar.Brand>
+      </div>
+      <div className="navbar-toggler-container">
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="nav-items"/>
+      </div>
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto "></Nav>
           <Nav className="nav-items">
