@@ -59,6 +59,22 @@
 }
 
 /* Navbar */
+.navbar-brand-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 5px; /* Adjust as needed */
+  z-index: 1000; /* Ensure the brand stays on top */
+}
+
+.navbar-toggler-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px; /* Adjust as needed */
+  z-index: 1000; /* Ensure the brand stays on top */
+}
+
 #navbar {
   margin-top: 10px;
   /* background-color: #F3CFC6; */
@@ -67,7 +83,7 @@
 }
 
 #nav-brand {
-  margin-left: 5%;
+  margin-left: 35%;
 }
 
 #nav-logo {
@@ -83,7 +99,7 @@
 .navbar-collapse {
   /* background-color: #F3CFC6; */
   /* background-color: #fff0f0; */
-  margin-top: 3px;
+  padding-top: 5px;
 }
 
 /* About */
@@ -208,6 +224,11 @@
 }
 
 @media screen and (max-width: 1280px) {
+  /* Header */
+  .nav-items {
+    font-size: 18px;
+  }
+
   /* About */
   #about {
     display: inline-flex;
@@ -250,6 +271,29 @@
 }
 
 @media screen and (max-width: 992px) {
+  /* Header */
+  #navbar {
+    margin-top: 0;
+    height: 110px;
+    /* background-color: #fff0f0; */
+    --bs-navbar-padding-y: 0;
+    --bs-navbar-brand-padding-y: 0
+  }
+
+  #nav-brand {
+    margin-left: 0;
+  }
+
+  .navbar-toggler-container {
+    margin-top: 5px;
+  }
+
+  .navbar-collapse {
+    margin-top: 0;
+    background-color: #fff0f0;
+    border-bottom: black 1px solid;
+  }
+
   /* About */
   #about {
     display: inline-flex;
@@ -297,11 +341,14 @@
     margin-top: 0;
     height: 90px;
     /* background-color: #fff0f0; */
+    --bs-navbar-padding-y: 0;
+    --bs-navbar-brand-padding-y: 0
   }
 
   .navbar-collapse {
     margin-top: 0;
     background-color: #fff0f0;
+    border-bottom: black 1px solid;
   }
 
   #nav-brand {
@@ -322,7 +369,7 @@
   #about {
     display: inline-block;
     margin-top: -25px;
-    scroll-margin-top: 200px;
+    scroll-margin-top: 10px;
   }
   
   .rays {
@@ -352,7 +399,7 @@
   /* Portfolio */
   #portfolio {
     margin-top: 15px;
-    scroll-margin-top: 250px;
+    scroll-margin-top: 100px;
   }
 
   .art-dimensions {
@@ -374,10 +421,19 @@
     font-size: 16px;
   }
 
+  #nav-brand {
+    margin-left: 1%;
+  }
+  
+  #nav-logo {
+    width: 85px;
+    height: auto;
+  }
+
   /* About */
   #about {
     display: inline-block;
-    margin-top: -50px;
+    margin-top: -25px;
   }
   
   .rays {
