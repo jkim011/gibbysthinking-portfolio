@@ -4,8 +4,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import Logo from '../assets/logo.png';
 
 function Header() {
+  var prevScrollpos = window.scrollY;
+  window.onscroll = function() {
+    var currentScrollPos = window.scrollY;
+    if (prevScrollpos > currentScrollPos) {
+      document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-160px";
+    }
+    prevScrollpos = currentScrollPos;
+  }
   return (
-    <Navbar id="navbar" bg="#F3CFC6" expand="lg" sticky="top" collapseOnSelect>
+    <Navbar id="navbar" bg="#F3CFC6" expand="lg" fixed="top" collapseOnSelect>
       <div className="navbar-brand-container">
         <Navbar.Brand href="/" id="nav-brand"><img src={Logo} id="nav-logo"/></Navbar.Brand>
       </div>

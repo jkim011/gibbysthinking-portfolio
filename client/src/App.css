@@ -80,6 +80,7 @@
   /* background-color: #F3CFC6; */
   /* background-color: #fff0f0; */
   height: 125px;
+  transition: ease top .3s;
 }
 
 #nav-brand {
@@ -105,7 +106,7 @@
 /* About */
 #about {
   display: flex;
-  margin-top: 40px;
+  margin-top: 10rem;
   /* margin-left: auto;
   margin-right: auto; */
   justify-content: center;
@@ -146,8 +147,14 @@
 }
 
 /* Portfolio */
-#image-form:hover {
-  cursor: pointer;
+#image-form {
+  border: black solid 2px;
+  background-color: rgb(241, 241, 241);
+  width: 30rem;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #portfolio {
@@ -192,7 +199,7 @@
   /* About */
   #about {
     /* display: inline-flex; */
-    margin-top: 20px;
+    margin-top: 8rem;
   }
 
   .rays {
@@ -242,10 +249,9 @@
   }
 
   /* About */
-  #about {
-    /* display: inline-flex; */
-    margin-top: 20px;
-  }
+  /* #about {
+    margin-top: 7rem;
+  } */
   
   .rays {
     width: 140px;
@@ -300,6 +306,10 @@
     margin-left: 0;
   }
 
+  #nav-logo {
+    width: 155px;
+  }
+
   .navbar-toggler-container {
     margin-top: 3%;
   }
@@ -313,7 +323,7 @@
   /* About */
   #about {
     /* display: inline-flex; */
-    margin-top: 20px;
+    margin-top: 6rem;
   }
   
   .rays {
@@ -376,7 +386,7 @@
   }
   
   #nav-logo {
-    width: 90px;
+    width: 100px;
     height: auto;
   }
 
@@ -387,8 +397,9 @@
   
   /* About */
   #about {
-    display: inline-block;
-    margin-top: -25px;
+    /* display: inline-block; */
+    flex-direction: column;
+    margin-top: 60px;
     scroll-margin-top: 10px;
   }
   
@@ -418,14 +429,18 @@
 
   .name-logo {
     width: 85%;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
   }
 
   /* Portfolio */
+  #image-form {
+    width: 97%;
+  }
+
   #portfolio {
     margin-top: 15px;
-    scroll-margin-top: 100px;
+    scroll-margin-top: 35px;
   }
 
   .art-dimensions {
@@ -459,7 +474,7 @@
   /* About */
   #about {
     /* display: inline-block; */
-    margin-top: -25px;
+    /* margin-top: -25px; */
   }
   
   .rays {
