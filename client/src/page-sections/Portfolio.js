@@ -4,10 +4,9 @@ import axios from 'axios';
 import Auth from '../utils/auth';
 import { jwtDecode } from 'jwt-decode';
 
-//////////// TODO: put conditions on submitImage
+//////////// TODO: 
 ////////////       find a way for mongodb data to be rearranged incase art work needs to be switched around
 ////////////       add delete function for data 
-////////////       add contact section 
 
 function Portfolio() {
   const [showModal, setShowModal] = useState({});
