@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  /* background-color: #F3CFC6; */
   background-color: #fff0f0;
 }
 
@@ -37,7 +36,6 @@
   font-size: 16px;
 }
 .button-submit:hover {
-  /* border: solid 1px #26d4c3; */
   background-color: #1fc9b8; 
   transition: .3s;
 }
@@ -53,7 +51,6 @@
   font-size: 16px;
 }
 .button-cancel:hover {
-  /* border: solid 1px #26d4c3; */
   background-color: #db4672; 
   transition: .3s;
 }
@@ -77,7 +74,6 @@
 
 #navbar {
   margin-top: 10px;
-  /* background-color: #F3CFC6; */
   /* background-color: #fff0f0; */
   height: 125px;
   transition: ease top .3s;
@@ -98,7 +94,6 @@
 }
 
 .navbar-collapse {
-  /* background-color: #F3CFC6; */
   /* background-color: #fff0f0; */
   padding-top: 5px;
 }
@@ -107,8 +102,6 @@
 #about {
   display: flex;
   margin-top: 10rem;
-  /* margin-left: auto;
-  margin-right: auto; */
   justify-content: center;
   align-items: center;
   scroll-margin-top: 110px;
@@ -126,8 +119,6 @@
   width: 300px;
   height: auto;
   border-radius: 50%;
-  /* margin-left: auto;
-  margin-right: 40px; */
 }
 
 .about-text {
@@ -136,9 +127,6 @@
   width: 750px;
   text-align: left;
   margin-left: 3rem;
-  /* margin-left: auto;
-  margin-right: 200px; */
-  /* margin-top: 55px; */
 }
 
 .name-logo {
@@ -168,7 +156,6 @@
 .art:hover {
   cursor: pointer;
   box-shadow: none;
-  /* border: #F3CFC6 2px solid; */
 }
 
 .art-dimensions {
@@ -195,10 +182,9 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 1630px) {
+@media screen and (max-width: 1630px) { /* Bigger tablets */
   /* About */
   #about {
-    /* display: inline-flex; */
     margin-top: 8rem;
   }
 
@@ -210,20 +196,12 @@
 
   .profile-avatar {
     width: 250px;
-    /* height: auto;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: 20px; */
   }
 
   .about-text {
     color: #715959;
     font-size: 16px;
     width: 450px;
-    /* text-align: left;
-    margin-left: auto;
-    margin-right: 140px;
-    margin-top: 25px; */
   }
 
   .name-logo {
@@ -239,20 +217,15 @@
     width: 320px;
     margin: 18px;
   }
-
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1280px) { /* Tablets */
   /* Header */
   .nav-items {
     font-size: 18px;
   }
 
   /* About */
-  /* #about {
-    margin-top: 7rem;
-  } */
-  
   .rays {
     width: 140px;
     height: auto;
@@ -261,20 +234,12 @@
   
   .profile-avatar {
     width: 250px;
-    /* height: auto;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: 20px; */
   }
   
   .about-text {
     color: #715959;
     font-size: 16px;
     width: 350px;
-    /* text-align: left;
-    margin-left: auto;
-    margin-right: 140px;
-    margin-top: 25px; */
   }
   
   .name-logo {
@@ -292,12 +257,11 @@
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) { /* Smaller tablets */
   /* Header */
   #navbar {
     margin-top: 0;
     height: 110px;
-    /* background-color: #fff0f0; */
     --bs-navbar-padding-y: 0;
     --bs-navbar-brand-padding-y: 0
   }
@@ -322,7 +286,6 @@
 
   /* About */
   #about {
-    /* display: inline-flex; */
     margin-top: 6rem;
   }
   
@@ -334,20 +297,12 @@
   
   .profile-avatar {
     width: 220px;
-    /* height: auto;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: 20px; */
   }
   
   .about-text {
     color: #715959;
     font-size: 16px;
     width: 350px;
-    /* text-align: left;
-    margin-left: auto;
-    margin-right: 145px;
-    margin-top: 15px; */
   }
 
   .name-logo {
@@ -365,12 +320,11 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 550px) { /* Phones */
   /* Header */
   #navbar {
     margin-top: 0;
     height: 90px;
-    /* background-color: #fff0f0; */
     --bs-navbar-padding-y: 0;
     --bs-navbar-brand-padding-y: 0
   }
@@ -397,7 +351,6 @@
   
   /* About */
   #about {
-    /* display: inline-block; */
     flex-direction: column;
     margin-top: 60px;
     scroll-margin-top: 10px;
@@ -411,10 +364,6 @@
   
   .profile-avatar {
     width: 160px;
-    /* height: auto; */
-    /* border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto; */
   }
   
   .about-text {
@@ -429,8 +378,6 @@
 
   .name-logo {
     width: 85%;
-    /* margin-left: auto;
-    margin-right: auto; */
   }
 
   /* Portfolio */
@@ -455,7 +402,7 @@
   }
 }
 
-@media screen and (max-width: 280px) {
+@media screen and (max-width: 280px) { /* Smaller phones */
   /* Header */
   .nav-items {
     margin-right: 5%;
@@ -472,11 +419,6 @@
   }
 
   /* About */
-  #about {
-    /* display: inline-block; */
-    /* margin-top: -25px; */
-  }
-  
   .rays {
     width: 100px;
     height: auto;
@@ -485,10 +427,6 @@
   
   .profile-avatar {
     width: 150px;
-    /* height: auto;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto; */
   }
   
   .about-text {
