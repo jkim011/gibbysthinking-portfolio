@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Auth from '../utils/auth';
-import { jwtDecode } from 'jwt-decode';
-
-//////////// TODO: 
-////////////       find a way for mongodb data to be rearranged incase art work needs to be switched around
-////////////       add delete function for data 
 
 function Portfolio() {
   const [showModal, setShowModal] = useState({});
@@ -46,6 +41,40 @@ function Portfolio() {
       ...prevShowModal,
       [artworkName]: !prevShowModal[artworkName],
     }));
+  };
+
+  // For drag and drop
+  const handleDragStart = (index) => (event) => {
+    event.dataTransfer.setData("index", index);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (index) => (event) => {
+    event.preventDefault();
+    const dragIndex = event.dataTransfer.getData("index");
+    const newImages = [...allImages];
+    const dragImage = newImages[dragIndex];
+    newImages.splice(dragIndex, 1);
+    newImages.splice(index, 0, dragImage);
+    setAllImages(newImages);
+    saveNewOrder(newImages);
+  };
+
+  const saveNewOrder = async (newImages) => {
+    const imageOrder = newImages.map(image => image._id);
+    console.log(imageOrder, "saveNewOrder")
+    try {
+      await axios.post(
+        "/api/image/save-order",
+        { imageOrder },
+        { headers: { "Content-Type": "application/json" } }
+      );
+    } catch (error) {
+      console.error("Error saving new order:", error);
+    }
   };
   
   if(!Auth.loggedIn() ) { 
@@ -120,11 +149,15 @@ function Portfolio() {
                           alt={index}
                           className="art art-dimensions box-shadow"
                           onClick={() => toggleModal(index)}
+                          draggable // Enable drag and drop
+                          onDragStart={handleDragStart(index)} // Handle drag start event
+                          onDragOver={handleDragOver} // Handle drag over event
+                          onDrop={handleDrop(index)} // Handle drop event
                         />
               })}
           </div>
           
-          {allImages == null 
+          {/* {allImages == null 
             ? "" 
             : allImages.map((data, index) => {
               return <Modal
@@ -138,7 +171,7 @@ function Portfolio() {
                       >
                         <img src={require(`../assets/art/${data.image}`)} alt={index} />
                       </Modal>
-            })}
+            })} */}
         </div>
       </div>
     );

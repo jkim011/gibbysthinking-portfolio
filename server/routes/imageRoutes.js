@@ -2,7 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const {
   uploadImage,
-  getImage
+  getImage,
+  saveImageOrder 
 } = require('../controllers/imageControllers');
 
 const router = express.Router();
@@ -23,6 +24,8 @@ const upload = multer({ storage: storage })
 router.post("/upload-image", upload.single("image"), uploadImage);
 
 router.get("/get-image", getImage);
+
+router.post("/save-order", saveImageOrder); 
 
 
 module.exports = router
