@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const ImageModelSchema = new mongoose.Schema(
   {
-    image: String
+    image: String,
+    order: Number
   },
   {
     collection: "images"
