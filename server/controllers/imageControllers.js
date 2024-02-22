@@ -14,7 +14,7 @@ const uploadImage = async (req, res) => {
 
 const getImage = async (req, res) => {
   try {
-    Images.find({}).sort({order: -1}).then(data => {
+    Images.find({}).sort({order: 1}).then(data => {
       res.send({status: "ok", data: data});
     });
   } catch (error) {
@@ -28,7 +28,7 @@ const saveImageOrder = async (req, res) => {
   try {
     await Promise.all(
       imageOrder.map(async (id, index) => {
-        await Images.updateOne({ _id: id }, { $set: {order: index + 1} })
+        await Images.updateMany({ _id: id }, { $set: {order: index + 1} })
       })
     );
     res.json({ status: "ok" });
