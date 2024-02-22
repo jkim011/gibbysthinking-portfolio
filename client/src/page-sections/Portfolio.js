@@ -149,29 +149,13 @@ function Portfolio() {
                           alt={index}
                           className="art art-dimensions box-shadow"
                           onClick={() => toggleModal(index)}
-                          draggable // Enable drag and drop
-                          onDragStart={handleDragStart(index)} // Handle drag start event
-                          onDragOver={handleDragOver} // Handle drag over event
-                          onDrop={handleDrop(index)} // Handle drop event
+                          draggable 
+                          onDragStart={handleDragStart(index)} 
+                          onDragOver={handleDragOver} 
+                          onDrop={handleDrop(index)} 
                         />
               })}
           </div>
-          
-          {/* {allImages == null 
-            ? "" 
-            : allImages.map((data, index) => {
-              return <Modal
-                        key={index}
-                        className="art-modals"
-                        size="lg"
-                        show={showModal[index]}
-                        onHide={() => toggleModal(index)}
-                        aria-labelledby="example-modal-sizes-title-lg"
-                        centered
-                      >
-                        <img src={require(`../assets/art/${data.image}`)} alt={index} />
-                      </Modal>
-            })} */}
         </div>
       </div>
     );
