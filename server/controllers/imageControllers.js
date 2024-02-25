@@ -37,9 +37,14 @@ const saveImageOrder = async (req, res) => {
   }
 };
 
+const deleteImage = async (req, res) => {
+  
+}
+
 
 module.exports = {
   uploadImage,
   getImage,
-  saveImageOrder
+  saveImageOrder,
+  deleteImage
 }

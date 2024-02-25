@@ -44,17 +44,17 @@ function Portfolio() {
   };
 
   // For drag and drop
-  const handleDragStart = (index) => (event) => {
-    event.dataTransfer.setData("index", index);
+  const handleDragStart = (index) => (e) => {
+    e.dataTransfer.setData("index", index);
   };
 
-  const handleDragOver = (event) => {
-    event.preventDefault();
+  const handleDragOver = (e) => {
+    e.preventDefault();
   };
 
-  const handleDrop = (index) => (event) => {
-    event.preventDefault();
-    const dragIndex = event.dataTransfer.getData("index");
+  const handleDrop = (index) => (e) => {
+    e.preventDefault();
+    const dragIndex = e.dataTransfer.getData("index");
     const newImages = [...allImages];
     const dragImage = newImages[dragIndex];
     newImages.splice(dragIndex, 1);
@@ -76,6 +76,11 @@ function Portfolio() {
       console.error("Error saving new order:", error);
     }
   };
+
+  const handleDeleteImage = async (e) => {
+    e.preventDefault();
+    
+  }
   
   if(!Auth.loggedIn() ) { 
     return (
