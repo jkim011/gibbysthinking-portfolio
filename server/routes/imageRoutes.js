@@ -3,7 +3,8 @@ const multer = require("multer");
 const {
   uploadImage,
   getImage,
-  saveImageOrder 
+  saveImageOrder, 
+  deleteImage
 } = require('../controllers/imageControllers');
 
 const router = express.Router();
@@ -26,6 +27,8 @@ router.post("/upload-image", upload.single("image"), uploadImage);
 router.get("/get-image", getImage);
 
 router.post("/save-order", saveImageOrder); 
+
+router.post("/delete-image", deleteImage)
 
 
 module.exports = router
