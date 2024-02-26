@@ -28,7 +28,7 @@ router.get("/get-image", getImage);
 
 router.post("/save-order", saveImageOrder); 
 
-router.post("/delete-image", deleteImage)
+router.delete(`/delete-image/:id`, deleteImage)
 
 
 module.exports = router
