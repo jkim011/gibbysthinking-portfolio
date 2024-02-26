@@ -77,9 +77,15 @@ function Portfolio() {
     }
   };
 
-  const handleDeleteImage = async (e) => {
-    e.preventDefault();
-    
+  const handleDeleteImage = async (id) => {
+    try {
+      await axios.delete(
+        `/api/image/delete-image/${id}`,
+      )
+      getImage()
+    } catch (error) {
+      console.error("Error deleting image", error);
+    }
   }
   
   if(!Auth.loggedIn() ) { 
@@ -144,22 +150,30 @@ function Portfolio() {
         )} 
               
         <div>
-          <div className="art-section">
-            {allImages == null ? "" 
+          <div className="art-section ">
+            {allImages == null ? ""
               : 
-                allImages.map((data, index) => {
-                return <img 
-                          key={index}
-                          src={require(`../assets/art/${data.image}`)}
-                          alt={index}
-                          className="art art-dimensions box-shadow"
-                          onClick={() => toggleModal(index)}
-                          draggable 
-                          onDragStart={handleDragStart(index)} 
-                          onDragOver={handleDragOver} 
-                          onDrop={handleDrop(index)} 
-                        />
-              })}
+              allImages.map((data, index) => {
+              return (
+                <div >
+                  <img 
+                    key={index}
+                    src={require(`../assets/art/${data.image}`)}
+                    alt={index}
+                    className="art art-dimensions box-shadow"
+                    onClick={() => toggleModal(index)}
+                    draggable 
+                    onDragStart={handleDragStart(index)} 
+                    onDragOver={handleDragOver} 
+                    onDrop={handleDrop(index)} 
+                  />
+                  {adminIsLoggedIn && (
+                    <button onClick={() => handleDeleteImage(data._id)}>Delete</button>
+                  )}
+                </div>
+              );
+            })
+          }
           </div>
         </div>
       </div>

@@ -38,7 +38,16 @@ const saveImageOrder = async (req, res) => {
 };
 
 const deleteImage = async (req, res) => {
-  
+  try {
+    const { id } = req.params;
+    const deletedImage = await Images.findByIdAndDelete(id);
+    if (!deletedImage) {
+      return res.status(404).json({ status: "error", message: "Image not found" });
+    }
+    res.json({ status: "ok", message: "Image deleted successfully", deletedImage });
+  } catch (error) {
+    res.status(500).json({ status: "error", message: error.message });
+  }
 }
 
 
