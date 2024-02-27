@@ -155,7 +155,7 @@ function Portfolio() {
               : 
               allImages.map((data, index) => {
               return (
-                <div >
+                <div className="position-relative d-inline-block">
                   <img 
                     key={index}
                     src={require(`../assets/art/${data.image}`)}
@@ -168,7 +168,7 @@ function Portfolio() {
                     onDrop={handleDrop(index)} 
                   />
                   {adminIsLoggedIn && (
-                    <button onClick={() => handleDeleteImage(data._id)}>Delete</button>
+                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleDeleteImage(data._id)}>Delete</button>
                   )}
                 </div>
               );
