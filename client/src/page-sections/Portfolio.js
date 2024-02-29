@@ -7,7 +7,9 @@ function Portfolio() {
   const [showModal, setShowModal] = useState({});
   const [showDelete, setShowDelete] = useState(false)
   const handleClose = () => setShowDelete(false);
-  const handleShow = () => setShowDelete(true);
+  const handleShow = (id) => setShowDelete({ [id]: true});
+  
+  const [isImageSelected, setIsImageSelected] = useState(false);
 
   const [image, setImage] = useState();
   const [allImages, setAllImages] = useState();
@@ -32,6 +34,7 @@ function Portfolio() {
   const handleChange = (e) => {
     const selectedImages = e.target.files[0];
     setImage(selectedImages);
+    setIsImageSelected(true);
   }
 
   const getImage = async () => {
@@ -145,7 +148,7 @@ function Portfolio() {
             <h3>Add Artwork:</h3>
             <form onSubmit={submitImage}>
               <input type="file" onChange={handleChange} multiple />
-              <button className="button-submit">Upload</button>
+              <button className="button-submit" disabled={!isImageSelected}>Upload</button>
             </form>
           </div>
         ) : (
@@ -171,9 +174,10 @@ function Portfolio() {
                     onDrop={handleDrop(index)} 
                   />
                   {adminIsLoggedIn && (
-                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={handleShow}>Delete</button>
+                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleDeleteImage(data._id)}>Delete</button>
+                    
                   )}
-                  <Modal show={showDelete} onHide={handleClose} centered>
+                  {/* <Modal show={showDelete} onHide={handleClose} center>
                     <Modal.Header closeButton>
                       <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
@@ -186,7 +190,7 @@ function Portfolio() {
                         Yes
                       </button>
                     </Modal.Footer>
-                  </Modal>
+                  </Modal> */}
                 </div>
               );
             })
