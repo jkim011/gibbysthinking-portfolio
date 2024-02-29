@@ -5,6 +5,9 @@ import Auth from '../utils/auth';
 
 function Portfolio() {
   const [showModal, setShowModal] = useState({});
+  const [showDelete, setShowDelete] = useState(false)
+  const handleClose = () => setShowDelete(false);
+  const handleShow = () => setShowDelete(true);
 
   const [image, setImage] = useState();
   const [allImages, setAllImages] = useState();
@@ -168,8 +171,22 @@ function Portfolio() {
                     onDrop={handleDrop(index)} 
                   />
                   {adminIsLoggedIn && (
-                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleDeleteImage(data._id)}>Delete</button>
+                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={handleShow}>Delete</button>
                   )}
+                  <Modal show={showDelete} onHide={handleClose} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Are you sure you want to delete this image?</Modal.Body>
+                    <Modal.Footer>
+                      <button variant="secondary" onClick={handleClose}>
+                        Cancel
+                      </button>
+                      <button variant="primary" onClick={() => handleDeleteImage(data._id)}>
+                        Yes
+                      </button>
+                    </Modal.Footer>
+                  </Modal>
                 </div>
               );
             })
