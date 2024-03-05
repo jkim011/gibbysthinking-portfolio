@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Auth from '../utils/auth';
@@ -17,6 +17,7 @@ function Portfolio() {
   useEffect(() => {
     getImage();
   },[])
+
   const submitImage = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -51,23 +52,51 @@ function Portfolio() {
 
   // For drag and drop
   const handleDragStart = (index) => (e) => {
-    e.dataTransfer.setData("index", index);
+    if (e.type === 'touchstart') {
+      // const touch = e.touches[0];
+      // e.clientX = touch.clientX;
+      // e.clientY = touch.clientY;
+      console.log("touch starting ")
+    }
+    if (e.dataTransfer) {
+      e.dataTransfer.setData("index", index);
+    }
   };
 
   const handleDragOver = (e) => {
-    e.preventDefault();
+
+    if (e.type === 'touchmove') {
+      // e.preventDefault();
+      console.log("touch moving ")
+    }
+    if (e.dataTransfer) {
+      e.preventDefault();
+      console.log("touch moving ")
+    }
+  };
+  
+  const handleDrop = (index) => (e) => {
+    // e.preventDefault();
+    if (e.type === 'touchend') {
+      // const touch = e.changedTouches[0];
+      // e.clientX = touch.clientX;
+      // e.clientY = touch.clientY;
+      console.log("touch ending ")
+    }
+    if (e.dataTransfer) {
+      const dragIndex = e.dataTransfer.getData("index");
+      const newImages = [...allImages];
+      const dragImage = newImages[dragIndex];
+      newImages.splice(dragIndex, 1);
+      newImages.splice(index, 0, dragImage);
+      setAllImages(newImages);
+      saveNewOrder(newImages);
+    }
   };
 
-  const handleDrop = (index) => (e) => {
-    e.preventDefault();
-    const dragIndex = e.dataTransfer.getData("index");
-    const newImages = [...allImages];
-    const dragImage = newImages[dragIndex];
-    newImages.splice(dragIndex, 1);
-    newImages.splice(index, 0, dragImage);
-    setAllImages(newImages);
-    saveNewOrder(newImages);
-  };
+  // window.addEventListener("touchstart", handleDragStart, {passive: false} );
+  // window.addEventListener("touchmove", handleDragOver, {passive: false} );
+  // window.addEventListener("touchend", handleDrop, {passive: false} );
 
   const saveNewOrder = async (newImages) => {
     const imageOrder = newImages.map(image => image._id);
@@ -171,7 +200,10 @@ function Portfolio() {
                     draggable 
                     onDragStart={handleDragStart(index)} 
                     onDragOver={handleDragOver} 
-                    onDrop={handleDrop(index)} 
+                    onDrop={handleDrop(index)}
+                    onTouchStart={handleDragStart(index)} 
+                    onTouchMove={handleDragOver}
+                    onTouchEnd={handleDrop(index)} 
                   />
                   {adminIsLoggedIn && (
                     <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleDeleteImage(data._id)}>Delete</button>
