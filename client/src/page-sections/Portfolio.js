@@ -54,9 +54,10 @@ function Portfolio() {
   const handleDragStart = (index) => (e) => {
     if (e.type === 'touchstart') {
       // const touch = e.touches[0];
-      // e.clientX = touch.clientX;
-      // e.clientY = touch.clientY;
+      // e.clientX = touch.pageX;
+      // e.clientY = touch.pageY;
       console.log("touch starting ")
+      console.log(index)
     }
     if (e.dataTransfer) {
       e.dataTransfer.setData("index", index);
@@ -79,9 +80,10 @@ function Portfolio() {
     // e.preventDefault();
     if (e.type === 'touchend') {
       // const touch = e.changedTouches[0];
-      // e.clientX = touch.clientX;
-      // e.clientY = touch.clientY;
+      // e.clientX = touch.pageX;
+      // e.clientY = touch.pageY;
       console.log("touch ending ")
+      console.log(index)
     }
     if (e.dataTransfer) {
       const dragIndex = e.dataTransfer.getData("index");
@@ -97,6 +99,100 @@ function Portfolio() {
   // window.addEventListener("touchstart", handleDragStart, {passive: false} );
   // window.addEventListener("touchmove", handleDragOver, {passive: false} );
   // window.addEventListener("touchend", handleDrop, {passive: false} );
+///////////////////////////////////////////////////////////////
+  let draggedItem = null;
+let touchStartX = 0;
+let touchStartY = 0;
+let originalIndex = 0;
+let originalX = 0;
+let originalY = 0;
+
+function touchStart(e) {
+  draggedItem = e.target;
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  originalIndex = Array.from(draggedItem.parentNode.children).indexOf(draggedItem);
+  originalX = draggedItem.offsetLeft;
+  originalY = draggedItem.offsetTop;
+  draggedItem.style.position = 'absolute';
+  draggedItem.style.zIndex = '1000';
+}
+
+function touchMove(e) {
+  e.preventDefault(); 
+  if (!draggedItem) return;
+
+  const deltaX = e.touches[0].clientX - touchStartX;
+  const deltaY = e.touches[0].clientY - touchStartY;
+  const newX = originalX + deltaX;
+  const newY = originalY + deltaY;
+
+  draggedItem.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+
+  const items = document.querySelectorAll('.item');
+  let targetItem = null;
+
+  items.forEach((item, index) => {
+    if (item === draggedItem) return;
+    const rect = item.getBoundingClientRect();
+
+    if (
+      e.touches[0].clientX > rect.left &&
+      e.touches[0].clientX < rect.right &&
+      e.touches[0].clientY > rect.top &&
+      e.touches[0].clientY < rect.bottom
+    ) {
+      targetItem = item;
+    }
+  });
+
+  if (targetItem) {
+    const parent = draggedItem.parentNode;
+    const draggedIndex = Array.from(parent.children).indexOf(draggedItem);
+    const targetIndex = Array.from(parent.children).indexOf(targetItem);
+
+    parent.removeChild(draggedItem);
+    if (draggedIndex < targetIndex) {
+      if (targetItem.nextSibling) {
+        parent.insertBefore(draggedItem, targetItem.nextSibling);
+      } else {
+        parent.appendChild(draggedItem);
+      }
+    } else {
+      parent.appendChild(draggedItem);
+    }
+  }
+}
+
+async function touchEnd(e) {
+  if (!draggedItem) return;
+
+  draggedItem.style.position = '';
+  draggedItem.style.zIndex = '';
+  draggedItem.style.transform = '';
+
+  const items = document.querySelectorAll('.item');
+  const newItemOrder = Array.from(items).map(item => item.dataset.imageId); 
+  console.log('New item order:', newItemOrder);
+
+  try {
+    await axios.post(
+      "/api/image/save-order",
+      { imageOrder: newItemOrder },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    console.log('New order saved successfully');
+  } catch (error) {
+    console.error('Error saving new order:', error);
+  }
+
+  draggedItem = null;
+}
+
+document.addEventListener('touchstart', touchStart, { passive: false });
+document.addEventListener('touchmove', touchMove, { passive: false });
+document.addEventListener('touchend', touchEnd, { passive: false });
+//////////////////////////////////////////////////
 
   const saveNewOrder = async (newImages) => {
     const imageOrder = newImages.map(image => image._id);
@@ -195,15 +291,19 @@ function Portfolio() {
                     key={index}
                     src={require(`../assets/art/${data.image}`)}
                     alt={index}
-                    className="art art-dimensions box-shadow"
+                    className="art art-dimensions box-shadow item"
                     onClick={() => toggleModal(index)}
                     draggable 
                     onDragStart={handleDragStart(index)} 
                     onDragOver={handleDragOver} 
                     onDrop={handleDrop(index)}
-                    onTouchStart={handleDragStart(index)} 
-                    onTouchMove={handleDragOver}
-                    onTouchEnd={handleDrop(index)} 
+                    // onTouchStart={handleDragStart(index)} 
+                    // onTouchMove={handleDragOver}
+                    // onTouchEnd={handleDrop(index)} 
+                    // onTouchStart={touchStart}
+                    // onTouchMove={touchMove}
+                    // onTouchEnd={touchEnd}
+                    data-image-id={data._id}
                   />
                   {adminIsLoggedIn && (
                     <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleDeleteImage(data._id)}>Delete</button>
