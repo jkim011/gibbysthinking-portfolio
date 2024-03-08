@@ -96,16 +96,14 @@ function Portfolio() {
     }
   };
 
-  // window.addEventListener("touchstart", handleDragStart, {passive: false} );
-  // window.addEventListener("touchmove", handleDragOver, {passive: false} );
-  // window.addEventListener("touchend", handleDrop, {passive: false} );
 ///////////////////////////////////////////////////////////////
-  let draggedItem = null;
+let draggedItem = null;
 let touchStartX = 0;
 let touchStartY = 0;
 let originalIndex = 0;
 let originalX = 0;
 let originalY = 0;
+let draggedItemIndex = 0;
 
 function touchStart(e) {
   draggedItem = e.target;
@@ -129,7 +127,7 @@ function touchMove(e) {
 
   draggedItem.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
 
-  const items = document.querySelectorAll('.item');
+  const items = document.querySelectorAll('.images');
   let targetItem = null;
 
   items.forEach((item, index) => {
@@ -143,25 +141,28 @@ function touchMove(e) {
       e.touches[0].clientY < rect.bottom
     ) {
       targetItem = item;
+      draggedItemIndex = index;
+      console.log("draggedItemIndex:", draggedItemIndex)
+      console.log("index:", index)
     }
   });
 
-  if (targetItem) {
-    const parent = draggedItem.parentNode;
-    const draggedIndex = Array.from(parent.children).indexOf(draggedItem);
-    const targetIndex = Array.from(parent.children).indexOf(targetItem);
+  // if (targetItem) {
+  //   const parent = draggedItem.parentNode;
+  //   const draggedIndex = Array.from(parent.children).indexOf(draggedItem);
+  //   const targetIndex = Array.from(parent.children).indexOf(targetItem);
 
-    parent.removeChild(draggedItem);
-    if (draggedIndex < targetIndex) {
-      if (targetItem.nextSibling) {
-        parent.insertBefore(draggedItem, targetItem.nextSibling);
-      } else {
-        parent.appendChild(draggedItem);
-      }
-    } else {
-      parent.appendChild(draggedItem);
-    }
-  }
+  //   parent.removeChild(draggedItem);
+  //   if (draggedIndex > targetIndex) {
+  //     if (targetItem.nextSibling) {
+  //       parent.insertBefore(draggedItem, targetItem.nextSibling);
+  //     } else {
+  //       parent.appendChild(draggedItem);
+  //     }
+  //   } else {
+  //     parent.appendChild(draggedItem);
+  //   }
+  // }
 }
 
 async function touchEnd(e) {
@@ -171,14 +172,26 @@ async function touchEnd(e) {
   draggedItem.style.zIndex = '';
   draggedItem.style.transform = '';
 
-  const items = document.querySelectorAll('.item');
-  const newItemOrder = Array.from(items).map(item => item.dataset.imageId); 
-  console.log('New item order:', newItemOrder);
+  const items = document.querySelectorAll('.images');
+  const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
+  
+  const draggedItemId = newImageOrder.splice(originalIndex, 1)[0]; 
+  newImageOrder.splice(draggedItemIndex, 0, draggedItemId); 
+
+  const parent = draggedItem.parentNode;
+  parent.removeChild(draggedItem); 
+  if(originalIndex > draggedItemIndex) {
+    parent.insertBefore(draggedItem, parent.children[draggedItemIndex]);
+  } else {
+    parent.append(draggedItem)
+  }
+
+  console.log('New item order:', newImageOrder);
 
   try {
     await axios.post(
       "/api/image/save-order",
-      { imageOrder: newItemOrder },
+      { imageOrder: newImageOrder },
       { headers: { "Content-Type": "application/json" } }
     );
     console.log('New order saved successfully');
@@ -187,11 +200,15 @@ async function touchEnd(e) {
   }
 
   draggedItem = null;
+  draggedItemIndex = 0; 
 }
 
-document.addEventListener('touchstart', touchStart, { passive: false });
-document.addEventListener('touchmove', touchMove, { passive: false });
-document.addEventListener('touchend', touchEnd, { passive: false });
+const images = document.querySelectorAll('.images')
+images.forEach(image => {
+  image.addEventListener('touchstart', touchStart, { passive: false });
+  image.addEventListener('touchmove', touchMove, { passive: false });
+  image.addEventListener('touchend', touchEnd, { passive: false });
+})
 //////////////////////////////////////////////////
 
   const saveNewOrder = async (newImages) => {
@@ -291,7 +308,7 @@ document.addEventListener('touchend', touchEnd, { passive: false });
                     key={index}
                     src={require(`../assets/art/${data.image}`)}
                     alt={index}
-                    className="art art-dimensions box-shadow item"
+                    className="art art-dimensions box-shadow images"
                     onClick={() => toggleModal(index)}
                     draggable 
                     onDragStart={handleDragStart(index)} 
