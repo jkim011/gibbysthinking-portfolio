@@ -52,24 +52,12 @@ function Portfolio() {
 
   // For drag and drop
   const handleDragStart = (index) => (e) => {
-    if (e.type === 'touchstart') {
-      // const touch = e.touches[0];
-      // e.clientX = touch.pageX;
-      // e.clientY = touch.pageY;
-      console.log("touch starting ")
-      console.log(index)
-    }
     if (e.dataTransfer) {
       e.dataTransfer.setData("index", index);
     }
   };
 
   const handleDragOver = (e) => {
-
-    if (e.type === 'touchmove') {
-      // e.preventDefault();
-      console.log("touch moving ")
-    }
     if (e.dataTransfer) {
       e.preventDefault();
       console.log("touch moving ")
@@ -77,14 +65,7 @@ function Portfolio() {
   };
   
   const handleDrop = (index) => (e) => {
-    // e.preventDefault();
-    if (e.type === 'touchend') {
-      // const touch = e.changedTouches[0];
-      // e.clientX = touch.pageX;
-      // e.clientY = touch.pageY;
-      console.log("touch ending ")
-      console.log(index)
-    }
+    e.preventDefault();
     if (e.dataTransfer) {
       const dragIndex = e.dataTransfer.getData("index");
       const newImages = [...allImages];
@@ -98,22 +79,24 @@ function Portfolio() {
 
 ///////////////////////////////////////////////////////////////
 let draggedItem = null;
-let touchStartX = 0;
-let touchStartY = 0;
-let originalIndex = 0;
-let originalX = 0;
-let originalY = 0;
-let draggedItemIndex = 0;
+let touchStartX;
+let touchStartY;
+let originalIndex;
+let originalX;
+let originalY;
+let draggedItemIndex;
 
 function touchStart(e) {
   draggedItem = e.target;
   touchStartX = e.touches[0].clientX;
   touchStartY = e.touches[0].clientY;
-  originalIndex = Array.from(draggedItem.parentNode.children).indexOf(draggedItem);
+  originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
   originalX = draggedItem.offsetLeft;
   originalY = draggedItem.offsetTop;
   draggedItem.style.position = 'absolute';
   draggedItem.style.zIndex = '1000';
+
+  console.log("originalIndex:", originalIndex)
 }
 
 function touchMove(e) {
@@ -125,7 +108,7 @@ function touchMove(e) {
   const newX = originalX + deltaX;
   const newY = originalY + deltaY;
 
-  draggedItem.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+  draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
 
   const items = document.querySelectorAll('.images');
   let targetItem = null;
@@ -177,14 +160,15 @@ async function touchEnd(e) {
   
   const draggedItemId = newImageOrder.splice(originalIndex, 1)[0]; 
   newImageOrder.splice(draggedItemIndex, 0, draggedItemId); 
-
-  const parent = draggedItem.parentNode;
-  parent.removeChild(draggedItem); 
-  if(originalIndex > draggedItemIndex) {
-    parent.insertBefore(draggedItem, parent.children[draggedItemIndex]);
-  } else {
-    parent.append(draggedItem)
-  }
+console.log("draggedItemIndex:", draggedItemIndex)
+console.log("originalIndex:", originalIndex)
+  // const parent = draggedItem.parentNode;
+  // parent.removeChild(draggedItem); 
+  // if(originalIndex > draggedItemIndex) {
+  //   parent.insertBefore(draggedItem, parent.children[draggedItemIndex]);
+  // } else {
+  //   parent.append(draggedItem)
+  // }
 
   console.log('New item order:', newImageOrder);
 
