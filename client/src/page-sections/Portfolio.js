@@ -77,123 +77,92 @@ function Portfolio() {
     }
   };
 
-///////////////////////////////////////////////////////////////
-let draggedItem = null;
-let touchStartX;
-let touchStartY;
-let originalIndex;
-let originalX;
-let originalY;
-let draggedItemIndex;
+  // For touch event drag n drop
+  let draggedItem = null;
+  let touchStartX;
+  let touchStartY;
+  let originalIndex;
+  let originalX;
+  let originalY;
+  let draggedItemIndex;
 
-function touchStart(e) {
-  draggedItem = e.target;
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
-  originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
-  originalX = draggedItem.offsetLeft;
-  originalY = draggedItem.offsetTop;
-  draggedItem.style.position = 'absolute';
-  draggedItem.style.zIndex = '1000';
-
-  console.log("originalIndex:", originalIndex)
-}
-
-function touchMove(e) {
-  e.preventDefault(); 
-  if (!draggedItem) return;
-
-  const deltaX = e.touches[0].clientX - touchStartX;
-  const deltaY = e.touches[0].clientY - touchStartY;
-  const newX = originalX + deltaX;
-  const newY = originalY + deltaY;
-
-  draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
-
-  const items = document.querySelectorAll('.images');
-  let targetItem = null;
-
-  items.forEach((item, index) => {
-    if (item === draggedItem) return;
-    const rect = item.getBoundingClientRect();
-
-    if (
-      e.touches[0].clientX > rect.left &&
-      e.touches[0].clientX < rect.right &&
-      e.touches[0].clientY > rect.top &&
-      e.touches[0].clientY < rect.bottom
-    ) {
-      targetItem = item;
-      draggedItemIndex = index;
-      console.log("draggedItemIndex:", draggedItemIndex)
-      console.log("index:", index)
-    }
-  });
-
-  // if (targetItem) {
-  //   const parent = draggedItem.parentNode;
-  //   const draggedIndex = Array.from(parent.children).indexOf(draggedItem);
-  //   const targetIndex = Array.from(parent.children).indexOf(targetItem);
-
-  //   parent.removeChild(draggedItem);
-  //   if (draggedIndex > targetIndex) {
-  //     if (targetItem.nextSibling) {
-  //       parent.insertBefore(draggedItem, targetItem.nextSibling);
-  //     } else {
-  //       parent.appendChild(draggedItem);
-  //     }
-  //   } else {
-  //     parent.appendChild(draggedItem);
-  //   }
-  // }
-}
-
-async function touchEnd(e) {
-  if (!draggedItem) return;
-
-  draggedItem.style.position = '';
-  draggedItem.style.zIndex = '';
-  draggedItem.style.transform = '';
-
-  const items = document.querySelectorAll('.images');
-  const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
-  
-  const draggedItemId = newImageOrder.splice(originalIndex, 1)[0]; 
-  newImageOrder.splice(draggedItemIndex, 0, draggedItemId); 
-console.log("draggedItemIndex:", draggedItemIndex)
-console.log("originalIndex:", originalIndex)
-  // const parent = draggedItem.parentNode;
-  // parent.removeChild(draggedItem); 
-  // if(originalIndex > draggedItemIndex) {
-  //   parent.insertBefore(draggedItem, parent.children[draggedItemIndex]);
-  // } else {
-  //   parent.append(draggedItem)
-  // }
-
-  console.log('New item order:', newImageOrder);
-
-  try {
-    await axios.post(
-      "/api/image/save-order",
-      { imageOrder: newImageOrder },
-      { headers: { "Content-Type": "application/json" } }
-    );
-    console.log('New order saved successfully');
-  } catch (error) {
-    console.error('Error saving new order:', error);
+  function touchStart(e) {
+    draggedItem = e.target;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
+    originalX = draggedItem.offsetLeft;
+    originalY = draggedItem.offsetTop;
+    draggedItem.style.position = 'absolute';
+    draggedItem.style.zIndex = '1000';
   }
 
-  draggedItem = null;
-  draggedItemIndex = 0; 
-}
+  function touchMove(e) {
+    e.preventDefault(); 
+    if (!draggedItem) return;
 
-const images = document.querySelectorAll('.images')
-images.forEach(image => {
-  image.addEventListener('touchstart', touchStart, { passive: false });
-  image.addEventListener('touchmove', touchMove, { passive: false });
-  image.addEventListener('touchend', touchEnd, { passive: false });
-})
-//////////////////////////////////////////////////
+    const deltaX = e.touches[0].clientX - touchStartX;
+    const deltaY = e.touches[0].clientY - touchStartY;
+    const newX = originalX + deltaX;
+    const newY = originalY + deltaY;
+
+    draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
+
+    const items = document.querySelectorAll('.images');
+    let targetItem = null;
+
+    items.forEach((item, index) => {
+      if (item === draggedItem) return;
+      const rect = item.getBoundingClientRect();
+
+      if (
+        e.touches[0].clientX > rect.left &&
+        e.touches[0].clientX < rect.right &&
+        e.touches[0].clientY > rect.top &&
+        e.touches[0].clientY < rect.bottom
+      ) {
+        targetItem = item;
+        draggedItemIndex = index;
+        console.log("draggedItemIndex:", draggedItemIndex)
+        console.log("index:", index)
+      }
+    });
+  }
+
+  async function touchEnd(e) {
+    if (!draggedItem) return;
+
+    draggedItem.style.position = '';
+    draggedItem.style.zIndex = '';
+    draggedItem.style.transform = '';
+
+    const items = document.querySelectorAll('.images');
+    const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
+    
+    const draggedItemId = newImageOrder.splice(originalIndex, 1)[0]; 
+    newImageOrder.splice(draggedItemIndex, 0, draggedItemId); 
+
+    try {
+      await axios.post(
+        "/api/image/save-order",
+        { imageOrder: newImageOrder },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      console.log('New order saved successfully');
+    } catch (error) {
+      console.error('Error saving new order:', error);
+    }
+
+    draggedItem = null;
+    draggedItemIndex = 0; 
+  }
+
+  const images = document.querySelectorAll('.images')
+  images.forEach(image => {
+    image.addEventListener('touchstart', touchStart, { passive: false });
+    image.addEventListener('touchmove', touchMove, { passive: false });
+    image.addEventListener('touchend', touchEnd, { passive: false });
+  })
 
   const saveNewOrder = async (newImages) => {
     const imageOrder = newImages.map(image => image._id);
