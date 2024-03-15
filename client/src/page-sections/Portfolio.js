@@ -94,7 +94,7 @@ function Portfolio() {
     originalX = draggedItem.offsetLeft;
     originalY = draggedItem.offsetTop;
     draggedItem.style.position = 'absolute';
-    draggedItem.style.zIndex = '1000';
+    draggedItem.style.zIndex = '10';
   }
 
   function touchMove(e) {
@@ -106,7 +106,10 @@ function Portfolio() {
     const newX = originalX + deltaX;
     const newY = originalY + deltaY;
 
-    draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
+    // draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
+    draggedItem.style.position = 'absolute'; // Set position to absolute
+    // draggedItem.style.left = `${newX}px`; // Update left position
+    // draggedItem.style.top = `${newY}px`; // Update top position
 
     const items = document.querySelectorAll('.images');
     let targetItem = null;
@@ -132,9 +135,12 @@ function Portfolio() {
   async function touchEnd(e) {
     if (!draggedItem) return;
 
-    draggedItem.style.position = '';
-    draggedItem.style.zIndex = '';
-    draggedItem.style.transform = '';
+    // draggedItem.style.position = '';
+    // draggedItem.style.zIndex = '';
+    // draggedItem.style.transform = '';
+    draggedItem.style.position = ''; 
+    draggedItem.style.left = ''; 
+    draggedItem.style.top = ''; 
 
     const items = document.querySelectorAll('.images');
     const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
@@ -155,6 +161,7 @@ function Portfolio() {
 
     draggedItem = null;
     draggedItemIndex = 0; 
+    window.location.reload();
   }
 
   const images = document.querySelectorAll('.images')
