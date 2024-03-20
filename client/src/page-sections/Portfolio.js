@@ -54,6 +54,20 @@ function Portfolio() {
   const handleDragStart = (index) => (e) => {
     if (e.dataTransfer) {
       e.dataTransfer.setData("index", index);
+
+      const clickedImage = e.target;
+      const dragImage = clickedImage.cloneNode(true);
+      
+      dragImage.style.opacity = "0.5"; 
+      console.log(dragImage, "opacity")
+      const dragImageWidth = dragImage.width / 2;
+      const dragImageHeight = dragImage.height / 2;
+      dragImage.style.width = dragImage.width / 2;
+      dragImage.style.height = dragImage.height / 2;
+      
+      const x = dragImage.width / 2;
+      const y = dragImage.height / 2;
+      e.dataTransfer.setDragImage(dragImage, x, y);
     }
   };
 
@@ -61,6 +75,8 @@ function Portfolio() {
     if (e.dataTransfer) {
       e.preventDefault();
       console.log("touch moving ")
+
+      e.dataTransfer.dropEffect = "move";
     }
   };
   
@@ -93,8 +109,8 @@ function Portfolio() {
     originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
     originalX = draggedItem.offsetLeft;
     originalY = draggedItem.offsetTop;
-    draggedItem.style.position = 'absolute';
-    draggedItem.style.zIndex = '10';
+    // draggedItem.style.position = 'absolute';
+    // draggedItem.style.zIndex = '10';
   }
 
   function touchMove(e) {
@@ -106,8 +122,8 @@ function Portfolio() {
     const newX = originalX + deltaX;
     const newY = originalY + deltaY;
 
-    // draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
-    draggedItem.style.position = 'absolute'; // Set position to absolute
+    draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
+    // draggedItem.style.position = 'absolute'; // Set position to absolute
     // draggedItem.style.left = `${newX}px`; // Update left position
     // draggedItem.style.top = `${newY}px`; // Update top position
 
