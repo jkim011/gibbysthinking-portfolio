@@ -64,7 +64,7 @@ function Portfolio() {
       const dragImageHeight = dragImage.height / 2;
       dragImage.style.width = dragImage.width / 2;
       dragImage.style.height = dragImage.height / 2;
-      
+    console.log(dragImage.width, "widthhhhhh")  
       const x = dragImage.width / 2;
       const y = dragImage.height / 2;
       e.dataTransfer.setDragImage(dragImage, x, y);
