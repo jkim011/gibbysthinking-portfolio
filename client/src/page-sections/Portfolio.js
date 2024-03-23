@@ -101,6 +101,7 @@ function Portfolio() {
   let originalX;
   let originalY;
   let draggedItemIndex;
+  let ghostImage = null;
 
   function touchStart(e) {
     draggedItem = e.target;
@@ -109,8 +110,18 @@ function Portfolio() {
     originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
     originalX = draggedItem.offsetLeft;
     originalY = draggedItem.offsetTop;
-    // draggedItem.style.position = 'absolute';
-    // draggedItem.style.zIndex = '10';
+
+    ghostImage = draggedItem.cloneNode(true);
+    ghostImage.style.opacity= "0.5";
+    ghostImage.style.transform = 'translate(0, 0)';
+    ghostImage.style.position = 'absolute';
+    ghostImage.style.zIndex = '10';
+////////////// buggy
+    const touch = e.touches[0];
+    ghostImage.style.left = touch.clientX - (draggedItem.offsetWidth / 2) + 'px';
+    ghostImage.style.top = touch.clientY - (draggedItem.offsetHeight / 2) + 'px';
+//////////////
+    document.body.appendChild(ghostImage);
   }
 
   function touchMove(e) {
@@ -122,10 +133,9 @@ function Portfolio() {
     const newX = originalX + deltaX;
     const newY = originalY + deltaY;
 
-    draggedItem.style.transform = `translate(${newX}px, ${newY}px)`;
-    // draggedItem.style.position = 'absolute'; // Set position to absolute
-    // draggedItem.style.left = `${newX}px`; // Update left position
-    // draggedItem.style.top = `${newY}px`; // Update top position
+    if (ghostImage) {
+      ghostImage.style.transform = `translate(${newX}px, ${newY}px)`;
+    }
 
     const items = document.querySelectorAll('.images');
     let targetItem = null;
@@ -151,12 +161,10 @@ function Portfolio() {
   async function touchEnd(e) {
     if (!draggedItem) return;
 
-    // draggedItem.style.position = '';
-    // draggedItem.style.zIndex = '';
-    // draggedItem.style.transform = '';
-    draggedItem.style.position = ''; 
-    draggedItem.style.left = ''; 
-    draggedItem.style.top = ''; 
+    if (ghostImage) {
+      ghostImage.parentNode.removeChild(ghostImage);
+      ghostImage = null;
+    }
 
     const items = document.querySelectorAll('.images');
     const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
