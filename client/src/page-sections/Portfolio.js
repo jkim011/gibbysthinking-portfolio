@@ -115,11 +115,11 @@ function Portfolio() {
     ghostImage.style.opacity= "0.5";
     ghostImage.style.transform = 'translate(0, 0)';
     ghostImage.style.position = 'absolute';
-    ghostImage.style.zIndex = '10';
+    ghostImage.style.zIndex = '1000';
 ////////////// buggy
     const touch = e.touches[0];
-    ghostImage.style.left = touch.clientX - (draggedItem.offsetWidth / 2) + 'px';
-    ghostImage.style.top = touch.clientY - (draggedItem.offsetHeight / 2) + 'px';
+    ghostImage.style.left = touch.clientX + 'px';
+    ghostImage.style.top = touch.clientY + 'px';
 //////////////
     document.body.appendChild(ghostImage);
   }
