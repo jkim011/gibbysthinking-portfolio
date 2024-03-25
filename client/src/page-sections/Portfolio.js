@@ -113,13 +113,15 @@ function Portfolio() {
 
     ghostImage = draggedItem.cloneNode(true);
     ghostImage.style.opacity= "0.5";
-    ghostImage.style.transform = 'translate(0, 0)';
+    ghostImage.style.transform = 'translate(10, 10)';
     ghostImage.style.position = 'absolute';
     ghostImage.style.zIndex = '1000';
 ////////////// buggy
     const touch = e.touches[0];
-    ghostImage.style.left = touch.clientX + 'px';
-    ghostImage.style.top = touch.clientY + 'px';
+    const offsetX = touch.clientX - (originalX + (draggedItem.offsetWidth / 2));
+    const offsetY = touch.clientY - (originalY + (draggedItem.offsetHeight / 2));
+    ghostImage.style.left = touch.clientX - offsetX + (draggedItem.offsetWidth / 2) + 'px';
+    ghostImage.style.top = touch.clientY - offsetY + (draggedItem.offsetHeight / 2) + 'px';
 //////////////
     document.body.appendChild(ghostImage);
   }
