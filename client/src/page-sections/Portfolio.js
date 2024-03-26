@@ -114,6 +114,7 @@ function Portfolio() {
     console.log(draggedItem, "dragged item")
     if(draggedItem) return null
 
+    if(draggedItem) {
     ghostImage = draggedItem.cloneNode(true);
     ghostImage.style.opacity= "0.5";
     ghostImage.style.transform = 'translate(10, 10)';
@@ -123,10 +124,12 @@ function Portfolio() {
     // const touch = e.touches[0];
     // const offsetX = touch.clientX - (originalX + (draggedItem.offsetWidth / 2));
     // const offsetY = touch.clientY - (originalY + (draggedItem.offsetHeight / 2));
-    // ghostImage.style.left = touch.clientX - offsetX + (draggedItem.offsetWidth / 2) + 'px';
-    // ghostImage.style.top = touch.clientY - offsetY + (draggedItem.offsetHeight / 2) + 'px';
+    ghostImage.style.left = originalX + 'px';
+ghostImage.style.top = originalY + 'px';
 //////////////
+console.log(ghostImage, "ghost image")
     document.body.appendChild(ghostImage);
+    }
   }
 
   function touchMove(e) {
@@ -139,7 +142,8 @@ function Portfolio() {
     const newY = originalY + deltaY;
 
     if (ghostImage) {
-      ghostImage.style.transform = `translate(${newX}px, ${newY}px)`;
+      ghostImage.style.left = newX + 'px';
+      ghostImage.style.top = newY + 'px';
     }
 
     const items = document.querySelectorAll('.images');
