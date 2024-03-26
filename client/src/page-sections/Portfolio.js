@@ -111,17 +111,20 @@ function Portfolio() {
     originalX = draggedItem.offsetLeft;
     originalY = draggedItem.offsetTop;
 
+    console.log(draggedItem, "dragged item")
+    if(draggedItem) return null
+
     ghostImage = draggedItem.cloneNode(true);
     ghostImage.style.opacity= "0.5";
     ghostImage.style.transform = 'translate(10, 10)';
     ghostImage.style.position = 'absolute';
     ghostImage.style.zIndex = '1000';
 ////////////// buggy
-    const touch = e.touches[0];
-    const offsetX = touch.clientX - (originalX + (draggedItem.offsetWidth / 2));
-    const offsetY = touch.clientY - (originalY + (draggedItem.offsetHeight / 2));
-    ghostImage.style.left = touch.clientX - offsetX + (draggedItem.offsetWidth / 2) + 'px';
-    ghostImage.style.top = touch.clientY - offsetY + (draggedItem.offsetHeight / 2) + 'px';
+    // const touch = e.touches[0];
+    // const offsetX = touch.clientX - (originalX + (draggedItem.offsetWidth / 2));
+    // const offsetY = touch.clientY - (originalY + (draggedItem.offsetHeight / 2));
+    // ghostImage.style.left = touch.clientX - offsetX + (draggedItem.offsetWidth / 2) + 'px';
+    // ghostImage.style.top = touch.clientY - offsetY + (draggedItem.offsetHeight / 2) + 'px';
 //////////////
     document.body.appendChild(ghostImage);
   }
@@ -162,6 +165,7 @@ function Portfolio() {
 
   async function touchEnd(e) {
     if (!draggedItem) return;
+    if (!draggedItemIndex && draggedItemIndex !== 0) return;
 
     if (ghostImage) {
       ghostImage.parentNode.removeChild(ghostImage);
