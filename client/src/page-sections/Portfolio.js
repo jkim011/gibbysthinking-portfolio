@@ -112,39 +112,45 @@ function Portfolio() {
     originalY = draggedItem.offsetTop;
 
     console.log(draggedItem, "dragged item")
-    if(draggedItem) return null
 
-    if(draggedItem) {
     ghostImage = draggedItem.cloneNode(true);
-    ghostImage.style.opacity= "0.5";
-    ghostImage.style.transform = 'translate(10, 10)';
+    ghostImage.style.opacity = "0.5";
     ghostImage.style.position = 'absolute';
-    ghostImage.style.zIndex = '1000';
-////////////// buggy
-    // const touch = e.touches[0];
-    // const offsetX = touch.clientX - (originalX + (draggedItem.offsetWidth / 2));
-    // const offsetY = touch.clientY - (originalY + (draggedItem.offsetHeight / 2));
-    ghostImage.style.left = originalX + 'px';
-ghostImage.style.top = originalY + 'px';
-//////////////
-console.log(ghostImage, "ghost image")
+    ghostImage.style.pointerEvents = 'none'; 
     document.body.appendChild(ghostImage);
-    }
+    // updateGhostPosition(e.touches[0]);
+
+    if(draggedItem) return null
+  }
+  function updateGhostPosition(touch) {
+    const offsetX = touch.clientX - touchStartX;
+    const offsetY = touch.clientY - touchStartY;
+    const newX = originalX + offsetX;
+    const newY = originalY + offsetY;
+  
+    ghostImage.style.left = newX + 'px';
+    ghostImage.style.top = newY + 'px';
+
+    // ghostImage.style.transform = `translate(${newX}px, ${newY}px)`
+
+    if(draggedItem) return null
   }
 
   function touchMove(e) {
     e.preventDefault(); 
     if (!draggedItem) return;
 
-    const deltaX = e.touches[0].clientX - touchStartX;
-    const deltaY = e.touches[0].clientY - touchStartY;
-    const newX = originalX + deltaX;
-    const newY = originalY + deltaY;
+    updateGhostPosition(e.touches[0]);
 
-    if (ghostImage) {
-      ghostImage.style.left = newX + 'px';
-      ghostImage.style.top = newY + 'px';
-    }
+    // const deltaX = e.touches[0].clientX - touchStartX;
+    // const deltaY = e.touches[0].clientY - touchStartY;
+    // const newX = originalX + deltaX;
+    // const newY = originalY + deltaY;
+
+    // if (ghostImage) {
+    //   ghostImage.style.left = newX + 'px';
+    //   ghostImage.style.top = newY + 'px';
+    // }
 
     const items = document.querySelectorAll('.images');
     let targetItem = null;
@@ -304,7 +310,7 @@ console.log(ghostImage, "ghost image")
                     alt={index}
                     className="art art-dimensions box-shadow images"
                     onClick={() => toggleModal(index)}
-                    draggable 
+                    draggable
                     onDragStart={handleDragStart(index)} 
                     onDragOver={handleDragOver} 
                     onDrop={handleDrop(index)}
