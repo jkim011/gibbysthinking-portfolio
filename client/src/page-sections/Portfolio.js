@@ -56,18 +56,25 @@ function Portfolio() {
       e.dataTransfer.setData("index", index);
 
       const clickedImage = e.target;
+      const dragImageContainer = document.createElement("div");
+      dragImageContainer.style.position = "absolute";
+      dragImageContainer.style.left = "-9999px"; 
+      document.body.appendChild(dragImageContainer);
+
       const dragImage = clickedImage.cloneNode(true);
-      
-      dragImage.style.opacity = "0.5"; 
-      console.log(dragImage, "opacity")
-      const dragImageWidth = dragImage.width / 2;
-      const dragImageHeight = dragImage.height / 2;
-      dragImage.style.width = dragImage.width / 2;
-      dragImage.style.height = dragImage.height / 2;
-    console.log(dragImage.width, "widthhhhhh")  
+      dragImageContainer.appendChild(dragImage);
+
+      dragImage.style.opacity = ".9"; 
+      dragImage.style.width = clickedImage.width + "px";
+      dragImage.style.height = clickedImage.height + "px";
+
       const x = dragImage.width / 2;
       const y = dragImage.height / 2;
-      e.dataTransfer.setDragImage(dragImage, x, y);
+      e.dataTransfer.setDragImage(dragImageContainer, x, y);
+      
+      setTimeout(() => {
+        document.body.removeChild(dragImageContainer);
+      }, 0);
     }
   };
 
