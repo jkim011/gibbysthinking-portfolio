@@ -118,13 +118,13 @@ function Portfolio() {
     originalX = draggedItem.offsetLeft;
     originalY = draggedItem.offsetTop;
 
-    console.log(draggedItem, "dragged item")
+    // console.log(draggedItem, "dragged item")
 
-    ghostImage = draggedItem.cloneNode(true);
-    ghostImage.style.opacity = "0.5";
-    ghostImage.style.position = 'absolute';
-    ghostImage.style.pointerEvents = 'none'; 
-    document.body.appendChild(ghostImage);
+    // ghostImage = draggedItem.cloneNode(true);
+    // ghostImage.style.opacity = "0.5";
+    // ghostImage.style.position = 'absolute';
+    // ghostImage.style.pointerEvents = 'none'; 
+    // document.body.appendChild(ghostImage);
     // updateGhostPosition(e.touches[0]);
 
     if(draggedItem) return null
@@ -147,7 +147,7 @@ function Portfolio() {
     e.preventDefault(); 
     if (!draggedItem) return;
 
-    updateGhostPosition(e.touches[0]);
+    // updateGhostPosition(e.touches[0]);
 
     // const deltaX = e.touches[0].clientX - touchStartX;
     // const deltaY = e.touches[0].clientY - touchStartY;
@@ -184,10 +184,10 @@ function Portfolio() {
     if (!draggedItem) return;
     if (!draggedItemIndex && draggedItemIndex !== 0) return;
 
-    if (ghostImage) {
-      ghostImage.parentNode.removeChild(ghostImage);
-      ghostImage = null;
-    }
+    // if (ghostImage) {
+    //   ghostImage.parentNode.removeChild(ghostImage);
+    //   ghostImage = null;
+    // }
 
     const items = document.querySelectorAll('.images');
     const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
