@@ -101,15 +101,135 @@ function Portfolio() {
   };
 
   // For touch event drag n drop
+  // let draggedItem = null;
+  // let touchStartX;
+  // let touchStartY;
+  // let originalIndex;
+  // let originalX;
+  // let originalY;
+  // let draggedItemIndex;
+  // let ghostImage = null;
+
+  // function touchStart(e) {
+  //   draggedItem = e.target;
+  //   touchStartX = e.touches[0].clientX;
+  //   touchStartY = e.touches[0].clientY;
+  //   originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
+  //   originalX = draggedItem.offsetLeft;
+  //   originalY = draggedItem.offsetTop;
+
+  //   // console.log(draggedItem, "dragged item")
+
+  //   // ghostImage = draggedItem.cloneNode(true);
+  //   // ghostImage.style.opacity = "0.5";
+  //   // ghostImage.style.position = 'absolute';
+  //   // ghostImage.style.pointerEvents = 'none'; 
+  //   // document.body.appendChild(ghostImage);
+  //   // updateGhostPosition(e.touches[0]);
+
+  //   if(draggedItem) return null
+  // }
+  // function updateGhostPosition(touch) {
+  //   const offsetX = touch.clientX - touchStartX;
+  //   const offsetY = touch.clientY - touchStartY;
+  //   const newX = originalX + offsetX;
+  //   const newY = originalY + offsetY;
+  
+  //   ghostImage.style.left = newX + 'px';
+  //   ghostImage.style.top = newY + 'px';
+
+  //   // ghostImage.style.transform = `translate(${newX}px, ${newY}px)`
+
+  //   if(draggedItem) return null
+  // }
+
+  // function touchMove(e) {
+  //   e.preventDefault(); 
+  //   if (!draggedItem) return;
+
+  //   // updateGhostPosition(e.touches[0]);
+
+  //   // const deltaX = e.touches[0].clientX - touchStartX;
+  //   // const deltaY = e.touches[0].clientY - touchStartY;
+  //   // const newX = originalX + deltaX;
+  //   // const newY = originalY + deltaY;
+
+  //   // if (ghostImage) {
+  //   //   ghostImage.style.left = newX + 'px';
+  //   //   ghostImage.style.top = newY + 'px';
+  //   // }
+
+  //   const items = document.querySelectorAll('.images');
+  //   let targetItem = null;
+
+  //   items.forEach((item, index) => {
+  //     if (item === draggedItem) return;
+  //     const rect = item.getBoundingClientRect();
+
+  //     if (
+  //       e.touches[0].clientX > rect.left &&
+  //       e.touches[0].clientX < rect.right &&
+  //       e.touches[0].clientY > rect.top &&
+  //       e.touches[0].clientY < rect.bottom
+  //     ) {
+  //       targetItem = item;
+  //       draggedItemIndex = index;
+  //       console.log("draggedItemIndex:", draggedItemIndex)
+  //       console.log("index:", index)
+  //     }
+  //   });
+  // }
+
+  // async function touchEnd(e) {
+  //   if (!draggedItem) return;
+  //   if (!draggedItemIndex && draggedItemIndex !== 0) return;
+
+  //   // if (ghostImage) {
+  //   //   ghostImage.parentNode.removeChild(ghostImage);
+  //   //   ghostImage = null;
+  //   // }
+
+  //   const items = document.querySelectorAll('.images');
+  //   const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
+    
+  //   const draggedItemId = newImageOrder.splice(originalIndex, 1)[0]; 
+  //   newImageOrder.splice(draggedItemIndex, 0, draggedItemId); 
+
+  //   try {
+  //     await axios.post(
+  //       "/api/image/save-order",
+  //       { imageOrder: newImageOrder },
+  //       { headers: { "Content-Type": "application/json" } }
+  //     );
+  //     console.log('New order saved successfully');
+  //   } catch (error) {
+  //     console.error('Error saving new order:', error);
+  //   }
+
+  //   draggedItem = null;
+  //   draggedItemIndex = 0; 
+  //   window.location.reload();
+  // }
+
+  // const images = document.querySelectorAll('.images')
+  // images.forEach(image => {
+  //   image.addEventListener('touchstart', touchStart, { passive: false });
+  //   image.addEventListener('touchmove', touchMove, { passive: false });
+  //   image.addEventListener('touchend', touchEnd, { passive: false });
+  // })
+
   let draggedItem = null;
+  let draggedItemIndex;
+  let originalIndex;
   let touchStartX;
   let touchStartY;
-  let originalIndex;
   let originalX;
   let originalY;
-  let draggedItemIndex;
-  let ghostImage = null;
-
+  let ghostImageContainer = null;
+  let ghostImage = null
+  let offsetX = 0;
+let offsetY = 0;
+  
   function touchStart(e) {
     draggedItem = e.target;
     touchStartX = e.touches[0].clientX;
@@ -117,47 +237,45 @@ function Portfolio() {
     originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
     originalX = draggedItem.offsetLeft;
     originalY = draggedItem.offsetTop;
-
-    // console.log(draggedItem, "dragged item")
-
-    // ghostImage = draggedItem.cloneNode(true);
-    // ghostImage.style.opacity = "0.5";
-    // ghostImage.style.position = 'absolute';
-    // ghostImage.style.pointerEvents = 'none'; 
-    // document.body.appendChild(ghostImage);
-    // updateGhostPosition(e.touches[0]);
-
+    
     if(draggedItem) return null
   }
-  function updateGhostPosition(touch) {
-    const offsetX = touch.clientX - touchStartX;
-    const offsetY = touch.clientY - touchStartY;
-    const newX = originalX + offsetX;
-    const newY = originalY + offsetY;
+
+  function createGhostImage() {
+    if (!ghostImageContainer) {
+      ghostImageContainer = document.createElement("div");
+      ghostImageContainer.style.position = "absolute";
+      ghostImageContainer.style.pointerEvents = "none";
+      ghostImageContainer.style.zIndex = "1000";
+      document.body.appendChild(ghostImageContainer);
+
+      ghostImage = draggedItem.cloneNode(true);
+      ghostImage.style.opacity = "0.5";
+      ghostImage.style.position = "relative";
+      ghostImage.style.left = "50%";////////////
+      ghostImage.style.top = "50%";///////////////// might have to adjust to set to image's original position
+      ghostImage.style.transform = "translate(-50%, -50%)";/////////////
+      ghostImageContainer.appendChild(ghostImage);
+
+      /////////////// set to image's original position
+      ghostImageContainer.style.left = originalX + "px";
+      ghostImageContainer.style.top = originalY + "px";
+    }
+  }
   
-    ghostImage.style.left = newX + 'px';
-    ghostImage.style.top = newY + 'px';
-
-    // ghostImage.style.transform = `translate(${newX}px, ${newY}px)`
-
-    if(draggedItem) return null
-  }
-
   function touchMove(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     if (!draggedItem) return;
 
-    // updateGhostPosition(e.touches[0]);
+    offsetX = e.touches[0].clientX - touchStartX;
+    offsetY = e.touches[0].clientY - touchStartY;
 
-    // const deltaX = e.touches[0].clientX - touchStartX;
-    // const deltaY = e.touches[0].clientY - touchStartY;
-    // const newX = originalX + deltaX;
-    // const newY = originalY + deltaY;
+    createGhostImage()
 
-    // if (ghostImage) {
-    //   ghostImage.style.left = newX + 'px';
-    //   ghostImage.style.top = newY + 'px';
-    // }
+    ghostImageContainer.style.left = originalX + offsetX + "px";
+    ghostImageContainer.style.top = originalY + offsetY + "px";
+console.log(e.touches[0].clientX - offsetX + "px")
+console.log(e.touches[0].clientY - offsetY + "px")
 
     const items = document.querySelectorAll('.images');
     let targetItem = null;
@@ -175,20 +293,23 @@ function Portfolio() {
         targetItem = item;
         draggedItemIndex = index;
         console.log("draggedItemIndex:", draggedItemIndex)
-        console.log("index:", index)
       }
     });
   }
-
+  
   async function touchEnd(e) {
     if (!draggedItem) return;
-    if (!draggedItemIndex && draggedItemIndex !== 0) return;
 
-    // if (ghostImage) {
-    //   ghostImage.parentNode.removeChild(ghostImage);
-    //   ghostImage = null;
-    // }
+    if (!draggedItemIndex && draggedItemIndex !== 0) {
+      ghostImageContainer.parentNode.removeChild(ghostImageContainer);
+      return
+    };
 
+    if (ghostImageContainer) {
+      ghostImageContainer.parentNode.removeChild(ghostImageContainer);
+      ghostImageContainer = null;
+    }
+  
     const items = document.querySelectorAll('.images');
     const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
     
@@ -210,13 +331,13 @@ function Portfolio() {
     draggedItemIndex = 0; 
     window.location.reload();
   }
-
-  const images = document.querySelectorAll('.images')
-  images.forEach(image => {
-    image.addEventListener('touchstart', touchStart, { passive: false });
-    image.addEventListener('touchmove', touchMove, { passive: false });
-    image.addEventListener('touchend', touchEnd, { passive: false });
-  })
+  
+  const images = document.querySelectorAll(".images");
+  images.forEach((image) => {
+    image.addEventListener("touchstart", touchStart, { passive: false });
+    image.addEventListener("touchmove", touchMove, { passive: false });
+    image.addEventListener("touchend", touchEnd, { passive: false });
+  });
 
   const saveNewOrder = async (newImages) => {
     const imageOrder = newImages.map(image => image._id);
