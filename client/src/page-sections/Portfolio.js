@@ -253,13 +253,13 @@ let offsetY = 0;
       ghostImage.style.opacity = "0.5";
       ghostImage.style.position = "relative";
       ghostImage.style.left = "50%";////////////
-      ghostImage.style.top = "50%";///////////////// might have to adjust to set to image's original position
-      ghostImage.style.transform = "translate(-50%, -50%)";/////////////
+      ghostImage.style.top = "50%";///////////////// 
+      ghostImage.style.transform = "translate(50%, 50%)";/////////////adjust this
       ghostImageContainer.appendChild(ghostImage);
 
       /////////////// set to image's original position
       ghostImageContainer.style.left = originalX + "px";
-      ghostImageContainer.style.top = originalY + "px";
+      ghostImageContainer.style.top = originalY + "px";      
     }
   }
   
