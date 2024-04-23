@@ -252,11 +252,11 @@ let offsetY = 0;
       ghostImage = draggedItem.cloneNode(true);
       ghostImage.style.opacity = "0.5";
       ghostImage.style.position = "relative";
-      ghostImage.style.left = "50%";////////////
-      ghostImage.style.top = "50%";///////////////// 
-      ghostImage.style.transform = "translate(50%, 50%)";/////////////adjust this
+      ghostImage.style.left = touchStartX;////////////
+      ghostImage.style.top = touchStartY;///////////////// 
+      ghostImage.style.transform = "translate(50%, 50%)";/////////////adjust this. try setting to touchstartx and y 
       ghostImageContainer.appendChild(ghostImage);
-
+console.log(touchStartX, touchStartY, "draggedItem")
       /////////////// set to image's original position
       ghostImageContainer.style.left = originalX + "px";
       ghostImageContainer.style.top = originalY + "px";      
@@ -274,8 +274,8 @@ let offsetY = 0;
 
     ghostImageContainer.style.left = originalX + offsetX + "px";
     ghostImageContainer.style.top = originalY + offsetY + "px";
-console.log(e.touches[0].clientX - offsetX + "px")
-console.log(e.touches[0].clientY - offsetY + "px")
+// console.log(e.touches[0].clientX - offsetX + "px")
+// console.log(e.touches[0].clientY - offsetY + "px")
 
     const items = document.querySelectorAll('.images');
     let targetItem = null;
