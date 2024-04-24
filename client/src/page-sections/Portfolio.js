@@ -252,9 +252,9 @@ let offsetY = 0;
       ghostImage = draggedItem.cloneNode(true);
       ghostImage.style.opacity = "0.5";
       ghostImage.style.position = "relative";
-      ghostImage.style.left = touchStartX;////////////
-      ghostImage.style.top = touchStartY;///////////////// 
-      ghostImage.style.transform = "translate(50%, 50%)";/////////////adjust this. try setting to touchstartx and y 
+      ghostImage.style.left = touchStartX +'px';//////////// This fixed positioning but now
+      ghostImage.style.top = touchStartY +'px';//////////// the index is wrong when moved
+      ghostImage.style.transform = "translate(-50%, -50%)";/////////////
       ghostImageContainer.appendChild(ghostImage);
 console.log(touchStartX, touchStartY, "draggedItem")
       /////////////// set to image's original position
