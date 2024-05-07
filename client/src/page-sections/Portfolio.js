@@ -251,15 +251,24 @@ let offsetY = 0;
 
       ghostImage = draggedItem.cloneNode(true);
       ghostImage.style.opacity = "0.5";
-      ghostImage.style.position = "relative";
-      ghostImage.style.left = touchStartX +'px';//////////// This fixed positioning but now
-      ghostImage.style.top = touchStartY +'px';//////////// the index is wrong when moved
-      // ghostImage.style.transform = "translate(-50%, -50%)";/////////////
+      ghostImage.style.position = "absolute";  
+      
+      const touchX = touchStartX + window.scrollX;
+      const touchY = touchStartY + window.scrollY;
+
+      const offsetX = ghostImage.offsetLeft / 2;
+      const offsetY = ghostImage.offsetTop / 2;
+      console.log(offsetX, offsetY);
+      console.log(touchStartX, touchStartY, "draggedItem");
+
+      ghostImage.style.left = touchX - offsetX + 'px';
+      ghostImage.style.top = touchY - offsetY + 'px';
+
       ghostImageContainer.appendChild(ghostImage);
-console.log(touchStartX, touchStartY, "draggedItem")
-      /////////////// set to image's original position
-      ghostImageContainer.style.left = originalX + "px";
-      ghostImageContainer.style.top = originalY + "px";      
+
+      ghostImageContainer.style.left = touchX - offsetX + 'px';
+      ghostImageContainer.style.top = touchY - offsetY + 'px';
+
     }
   }
   
