@@ -101,123 +101,6 @@ function Portfolio() {
   };
 
   // For touch event drag n drop
-  // let draggedItem = null;
-  // let touchStartX;
-  // let touchStartY;
-  // let originalIndex;
-  // let originalX;
-  // let originalY;
-  // let draggedItemIndex;
-  // let ghostImage = null;
-
-  // function touchStart(e) {
-  //   draggedItem = e.target;
-  //   touchStartX = e.touches[0].clientX;
-  //   touchStartY = e.touches[0].clientY;
-  //   originalIndex = Array.from(document.querySelectorAll('.images')).indexOf(draggedItem);
-  //   originalX = draggedItem.offsetLeft;
-  //   originalY = draggedItem.offsetTop;
-
-  //   // console.log(draggedItem, "dragged item")
-
-  //   // ghostImage = draggedItem.cloneNode(true);
-  //   // ghostImage.style.opacity = "0.5";
-  //   // ghostImage.style.position = 'absolute';
-  //   // ghostImage.style.pointerEvents = 'none'; 
-  //   // document.body.appendChild(ghostImage);
-  //   // updateGhostPosition(e.touches[0]);
-
-  //   if(draggedItem) return null
-  // }
-  // function updateGhostPosition(touch) {
-  //   const offsetX = touch.clientX - touchStartX;
-  //   const offsetY = touch.clientY - touchStartY;
-  //   const newX = originalX + offsetX;
-  //   const newY = originalY + offsetY;
-  
-  //   ghostImage.style.left = newX + 'px';
-  //   ghostImage.style.top = newY + 'px';
-
-  //   // ghostImage.style.transform = `translate(${newX}px, ${newY}px)`
-
-  //   if(draggedItem) return null
-  // }
-
-  // function touchMove(e) {
-  //   e.preventDefault(); 
-  //   if (!draggedItem) return;
-
-  //   // updateGhostPosition(e.touches[0]);
-
-  //   // const deltaX = e.touches[0].clientX - touchStartX;
-  //   // const deltaY = e.touches[0].clientY - touchStartY;
-  //   // const newX = originalX + deltaX;
-  //   // const newY = originalY + deltaY;
-
-  //   // if (ghostImage) {
-  //   //   ghostImage.style.left = newX + 'px';
-  //   //   ghostImage.style.top = newY + 'px';
-  //   // }
-
-  //   const items = document.querySelectorAll('.images');
-  //   let targetItem = null;
-
-  //   items.forEach((item, index) => {
-  //     if (item === draggedItem) return;
-  //     const rect = item.getBoundingClientRect();
-
-  //     if (
-  //       e.touches[0].clientX > rect.left &&
-  //       e.touches[0].clientX < rect.right &&
-  //       e.touches[0].clientY > rect.top &&
-  //       e.touches[0].clientY < rect.bottom
-  //     ) {
-  //       targetItem = item;
-  //       draggedItemIndex = index;
-  //       console.log("draggedItemIndex:", draggedItemIndex)
-  //       console.log("index:", index)
-  //     }
-  //   });
-  // }
-
-  // async function touchEnd(e) {
-  //   if (!draggedItem) return;
-  //   if (!draggedItemIndex && draggedItemIndex !== 0) return;
-
-  //   // if (ghostImage) {
-  //   //   ghostImage.parentNode.removeChild(ghostImage);
-  //   //   ghostImage = null;
-  //   // }
-
-  //   const items = document.querySelectorAll('.images');
-  //   const newImageOrder = Array.from(items).map(item => item.dataset.imageId);
-    
-  //   const draggedItemId = newImageOrder.splice(originalIndex, 1)[0]; 
-  //   newImageOrder.splice(draggedItemIndex, 0, draggedItemId); 
-
-  //   try {
-  //     await axios.post(
-  //       "/api/image/save-order",
-  //       { imageOrder: newImageOrder },
-  //       { headers: { "Content-Type": "application/json" } }
-  //     );
-  //     console.log('New order saved successfully');
-  //   } catch (error) {
-  //     console.error('Error saving new order:', error);
-  //   }
-
-  //   draggedItem = null;
-  //   draggedItemIndex = 0; 
-  //   window.location.reload();
-  // }
-
-  // const images = document.querySelectorAll('.images')
-  // images.forEach(image => {
-  //   image.addEventListener('touchstart', touchStart, { passive: false });
-  //   image.addEventListener('touchmove', touchMove, { passive: false });
-  //   image.addEventListener('touchend', touchEnd, { passive: false });
-  // })
-
   let draggedItem = null;
   let draggedItemIndex;
   let originalIndex;
@@ -228,7 +111,7 @@ function Portfolio() {
   let ghostImageContainer = null;
   let ghostImage = null
   let offsetX = 0;
-let offsetY = 0;
+  let offsetY = 0;
   
   function touchStart(e) {
     draggedItem = e.target;
@@ -451,36 +334,37 @@ let offsetY = 0;
                     onDragStart={handleDragStart(index)} 
                     onDragOver={handleDragOver} 
                     onDrop={handleDrop(index)}
-                    // onTouchStart={handleDragStart(index)} 
-                    // onTouchMove={handleDragOver}
-                    // onTouchEnd={handleDrop(index)} 
-                    // onTouchStart={touchStart}
-                    // onTouchMove={touchMove}
-                    // onTouchEnd={touchEnd}
                     data-image-id={data._id}
                   />
                   {adminIsLoggedIn && (
-                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleDeleteImage(data._id)}>Delete</button>
-                    
+                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleShow(data._id)}>Delete</button>
                   )}
-                  {/* <Modal show={showDelete} onHide={handleClose} center>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Are you sure you want to delete this image?</Modal.Body>
-                    <Modal.Footer>
-                      <button variant="secondary" onClick={handleClose}>
-                        Cancel
-                      </button>
-                      <button variant="primary" onClick={() => handleDeleteImage(data._id)}>
-                        Yes
-                      </button>
-                    </Modal.Footer>
-                  </Modal> */}
                 </div>
               );
-            })
-          }
+            })}
+            {allImages == null
+              ? ""
+              :allImages.map((data) => {
+               return <Modal 
+                        key={data._id} 
+                        show={showDelete[data._id]} 
+                        onHide={handleClose} 
+                        centered
+                      >
+                        {/* <Modal.Header closeButton>
+                          <Modal.Title>Modal heading</Modal.Title>
+                        </Modal.Header> */}
+                        <Modal.Body>Are you sure you want to delete this image?</Modal.Body>
+                        <Modal.Footer>
+                          <button variant="secondary" onClick={handleClose}>
+                            Cancel
+                          </button>
+                          <button variant="primary" onClick={() => handleDeleteImage(data._id)}>
+                            Yes
+                          </button>
+                        </Modal.Footer>
+                      </Modal>
+            })}
           </div>
         </div>
       </div>
