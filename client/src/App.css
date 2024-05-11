@@ -36,7 +36,7 @@
   font-size: 16px;
 }
 .button-submit:hover {
-  background-color: #1fc9b8; 
+  background-color: #1ebeae; 
   transition: .3s;
 }
 
@@ -136,8 +136,9 @@
 
 /* Portfolio */
 #image-form {
-  border: black solid 2px;
+  border: black solid 1px;
   background-color: rgb(241, 241, 241);
+  /* background-color: #fce6e6; */
   width: 30rem;
   padding-top: 1%;
   padding-bottom: 1%;

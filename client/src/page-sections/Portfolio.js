@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Auth from '../utils/auth';
@@ -64,7 +66,7 @@ function Portfolio() {
       const dragImage = clickedImage.cloneNode(true);
       dragImageContainer.appendChild(dragImage);
 
-      dragImage.style.opacity = ".9"; 
+      dragImage.style.opacity = "1"; 
       dragImage.style.width = clickedImage.width + "px";
       dragImage.style.height = clickedImage.height + "px";
 
@@ -306,8 +308,8 @@ function Portfolio() {
     return (
       <div id="portfolio">
         {adminIsLoggedIn == true ? (
-          <div id="image-form">
-            <h3>Add Artwork:</h3>
+          <div id="image-form" className="box-shadow">
+            <h3>Add Artwork</h3>
             <form onSubmit={submitImage}>
               <input type="file" onChange={handleChange} multiple />
               <button className="button-submit" disabled={!isImageSelected}>Upload</button>
@@ -337,7 +339,7 @@ function Portfolio() {
                     data-image-id={data._id}
                   />
                   {adminIsLoggedIn && (
-                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4" onClick={() => handleShow(data._id)}>Delete</button>
+                    <button className="position-absolute bottom-0 end-0 m-2 m-md-4 btn btn-danger" onClick={() => handleShow(data._id)}><FontAwesomeIcon icon={faTrash} /></button>
                   )}
                 </div>
               );
@@ -351,16 +353,13 @@ function Portfolio() {
                         onHide={handleClose} 
                         centered
                       >
-                        {/* <Modal.Header closeButton>
-                          <Modal.Title>Modal heading</Modal.Title>
-                        </Modal.Header> */}
                         <Modal.Body>Are you sure you want to delete this image?</Modal.Body>
                         <Modal.Footer>
-                          <button variant="secondary" onClick={handleClose}>
+                          <button className="btn btn-secondary" onClick={handleClose}>
                             Cancel
                           </button>
-                          <button variant="primary" onClick={() => handleDeleteImage(data._id)}>
-                            Yes
+                          <button className="btn btn-danger" onClick={() => handleDeleteImage(data._id)}>
+                            Delete
                           </button>
                         </Modal.Footer>
                       </Modal>
