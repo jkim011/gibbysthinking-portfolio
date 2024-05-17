@@ -26,9 +26,9 @@ function Header() {
         <Nav className="me-auto "></Nav>
           <Nav className="nav-items">
             <Nav.Link href="https://gibbysthinking.etsy.com" target="_blank" rel="noreferrer">Shop</Nav.Link>
-            <Nav.Link href="#about">About</Nav.Link>
-            <Nav.Link href="#portfolio">Portfolio</Nav.Link>
-            <Nav.Link href="#contact">Contact</Nav.Link>
+            <Nav.Link href="/#portfolio">Portfolio</Nav.Link>
+            <Nav.Link href="/about-me">About</Nav.Link>
+            <Nav.Link href="/#contact">Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>
