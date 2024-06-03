@@ -168,8 +168,6 @@ function Portfolio() {
 
     ghostImageContainer.style.left = originalX + offsetX + "px";
     ghostImageContainer.style.top = originalY + offsetY + "px";
-// console.log(e.touches[0].clientX - offsetX + "px")
-// console.log(e.touches[0].clientY - offsetY + "px")
 
     const items = document.querySelectorAll('.images');
     let targetItem = null;
