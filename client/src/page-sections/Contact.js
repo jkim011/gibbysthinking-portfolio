@@ -8,9 +8,9 @@ function Contact() {
   return (
     <div id="contact">
       <div className="contact-links">
-        <a href="https://www.instagram.com/gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={IgIcon}/></a>
-        <a href="https://www.tiktok.com/@gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={TiktokIconShape}/></a>
-        <a href="mailto: gabbypduran@gmail.com" target="_blank" rel="noreferrer"><img className="socials" src={EmailIcon}/></a>
+        <a href="https://www.instagram.com/gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={IgIcon} draggable="false"/></a>
+        <a href="https://www.tiktok.com/@gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={TiktokIconShape} draggable="false"/></a>
+        <a href="mailto: gabbypduran@gmail.com" target="_blank" rel="noreferrer"><img className="socials" src={EmailIcon} draggable="false"/></a>
       </div>
     </div>
   )
