@@ -16,6 +16,27 @@ const loginUser = async (req, res) => {
   }
 }
 
+const editAboutMe = async (req, res) => {
+  try {
+    const {username, aboutMe} = req.body;
+    console.log('Request Body:', req.body);
+    console.log('Username:', username);
+    console.log('AboutMe:', aboutMe);
+    const user = await User.findOneAndUpdate(
+      {username},
+      {aboutMe}
+    )
+    console.log(user)
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({ message: 'About Me updated successfully', user });
+  } catch (error) {
+    res.json({status: error});
+  }
+}
+
 module.exports = {
   loginUser,
+  editAboutMe
 }

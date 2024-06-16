@@ -182,19 +182,24 @@
 }
 
 /* Contact */
+#contact {
+  margin-top: 10rem;
+
+}
+
+/* Footer/Login */
 .socials {
   margin-left: 15px;
   margin-right: 15px;
   margin-bottom: 20px;
   margin-top: 35px;
-  width: 35px;
+  width: 33px;
   height: auto;
 }
 .socials:hover {
   filter: invert(64%) sepia(59%) saturate(275%) hue-rotate(314deg) brightness(100%) contrast(96%);;
 }
 
-/* Footer/Login */
 .login:hover {
   cursor: pointer;
 }
