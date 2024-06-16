@@ -9,9 +9,9 @@ const Footer = () => {
   return (
     <div id="footer">
       <div className="social-links">
-        <a href="https://www.instagram.com/gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={IgIcon} draggable="false"/></a>
-        <a href="https://www.tiktok.com/@gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={TiktokIconShape} draggable="false"/></a>
-        <a href="mailto: gabbypduran@gmail.com" target="_blank" rel="noreferrer"><img className="socials" src={EmailIcon} draggable="false"/></a>
+        <a href="https://www.instagram.com/gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={IgIcon} alt="Instagram" draggable="false"/></a>
+        <a href="https://www.tiktok.com/@gibbysthinking" target="_blank" rel="noreferrer"><img className="socials" src={TiktokIconShape} alt="TikTok" draggable="false"/></a>
+        <a href="mailto: gabbypduran@gmail.com" target="_blank" rel="noreferrer"><img className="socials" src={EmailIcon} alt="Email" draggable="false"/></a>
       </div>
       <Login />
     </div>

@@ -16,6 +16,11 @@ const UserModelSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
       required: true
+    },
+    aboutMe: {
+      type: String,
+      required: true,
+      trim: true
     }
   },
   {
