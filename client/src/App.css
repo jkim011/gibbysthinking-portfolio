@@ -166,7 +166,7 @@
 }
 
 /* About me */
-#about-me {
+.about-me {
   margin-top: 10rem;
   scroll-margin-top: 50px;
   display: flex;
