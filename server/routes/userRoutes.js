@@ -3,7 +3,8 @@ const { authMiddleware } = require("../utils/auth");
 
 const { 
   loginUser,
-  editAboutMe
+  editAboutMe,
+  queryMe
 } = require('../controllers/userControllers');
 const { updateMany } = require('../models/userModel');
 
@@ -16,6 +17,7 @@ router.get('/', authMiddleware, (req, res) => {
 
 router.post('/login', loginUser);
 router.post('/edit-about-me', editAboutMe);
+router.get('/query-me', queryMe);
 
 
 module.exports = router
