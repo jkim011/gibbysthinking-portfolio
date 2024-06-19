@@ -4,9 +4,7 @@ import Auth from '../utils/auth';
 import GabbyAvatar from '../assets/gabby-avatar-cropped.png';
 
 function AboutMe() {
-  // const user = Auth.getProfile().data
   const [user, setUser] = useState();
-  // const [user, setUser] = useState(Auth.getProfile().data);
   const [aboutMe, setAboutMe] = useState();
 
   useEffect(() => {
@@ -40,45 +38,6 @@ function AboutMe() {
     }
   };
 
-  // if(!Auth.loggedIn()) {
-  //   return (
-  //     <div className="about-me">
-  //       {/* <img src={GabbyAvatar} className="about-me-pic me-lg-3"/> */}
-  //       <p>{user?.aboutMe}</p>
-  //     </div>
-  //   )
-  // } else {      
-  //   const adminLoggedIn = () => {
-  //     const isUser = Auth.getProfile().data
-  //     if(isUser.isAdmin === true) {
-  //       return true
-  //     } else if(isUser.isAdmin === false) {
-  //       return false
-  //     }
-  //   }
-  //   const adminIsLoggedIn = adminLoggedIn();
-  //   return (
-  //     <div className="about-me">
-  //       <div className="about-me-text ms-lg-3">
-  //         <h1 className="mb-4">About Me</h1>
-  //         {adminIsLoggedIn == true ? (
-  //           <form className="" onSubmit={handleEditAboutMe}>
-  //             <textarea
-  //               className="textarea" 
-  //               onChange={handleChange}
-  //               placeholder={`${user?.aboutMe}`}
-  //               value={aboutMe}
-  //             />
-  //             <button type="submit">edit</button>
-  //           </form>
-  //         ) : (
-  //           <div></div>
-  //         )}
-
-  //       </div>
-  //     </div>
-  //   )
-  // }
   return (
     <div className="about-me">
       <div className="about-me-text ms-lg-3">
@@ -87,7 +46,7 @@ function AboutMe() {
           <p>{user?.aboutMe}</p>
         ) : (
           Auth.getProfile().data.isAdmin ? (
-            <form className="edit-about-me" onSubmit={handleEditAboutMe}>
+            <form className="edit-about-me text-start" onSubmit={handleEditAboutMe}>
               <textarea
                 className="textarea w-100"
                 onChange={handleChange}
