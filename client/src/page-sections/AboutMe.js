@@ -14,7 +14,6 @@ function AboutMe() {
   const queryMe = async () => {
     const result = await axios.get("api/user/query-me");
     setUser(result.data.user)
-    console.log(result.data.user.aboutMe, "result ")
   }
 
   const handleChange = (e) => {
@@ -37,7 +36,7 @@ function AboutMe() {
       console.error("Error editing about me:", error);
     }
   };
-
+ console.log(user)
   return (
     <div className="about-me">
       <div className="about-me-text ms-lg-3">

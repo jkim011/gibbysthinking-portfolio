@@ -3,16 +3,20 @@ const { signToken } = require('../utils/auth');
 
 const loginUser = async (req, res) => {
   try {
-    const {username, password} = req.body;
-    const user = await User.findOne({username})
-    if(user.password === password) {
-      const token = signToken(user)
-      res.status(200).json({username, token})
-    } else {
-      res.error("Incorrect password")
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
+    const isMatch = await user.isCorrectPassword(password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Incorrect password' });
+    }
+
+    const token = signToken(user);
+    res.status(200).json({ username, token });
   } catch (error) {
-    res.status(400).json({error: error.message})  
+    res.status(400).json({ error: error.message });
   }
 }
 
@@ -23,7 +27,7 @@ const editAboutMe = async (req, res) => {
       {username},
       {aboutMe}
     )
-    console.log(user)
+    // console.log(user)
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
