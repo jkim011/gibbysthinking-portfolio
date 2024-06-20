@@ -33,12 +33,13 @@ UserModelSchema.pre('save', async function (next) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
   next();
 });
 
 UserModelSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
+  const match = await bcrypt.compare(password, this.password);
+  console.log('Password match:', match);
+  return match;
 };
 
 module.exports = mongoose.model("userModel", UserModelSchema);
