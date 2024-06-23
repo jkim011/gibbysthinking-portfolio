@@ -4,6 +4,7 @@ const cors = require("cors")
 
 const imageRoutes = require('./routes/imageRoutes');
 const userRoutes = require('./routes/userRoutes');
+const mailRoutes = require('./routes/mailRoutes');
 
 const app = express();
 const port = 3001;
@@ -18,6 +19,7 @@ app.use(cors(corsOptions));
 ////// Routes
 app.use('/api/image', imageRoutes);
 app.use('/api/user', userRoutes);
+app.use('api/mail', mailRoutes);
 
 mongoose.connect("mongodb://localhost:27017/gibbysthinking_db", {
     useNewUrlParser: true,
