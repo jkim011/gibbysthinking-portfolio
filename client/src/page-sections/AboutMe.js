@@ -5,7 +5,7 @@ import GabbyAvatar from '../assets/gabby-avatar-cropped.png';
 
 function AboutMe() {
   const [user, setUser] = useState();
-  const [aboutMe, setAboutMe] = useState();
+  const [aboutMe, setAboutMe] = useState(user?.aboutMe);
 
   useEffect(() => {
     queryMe();
