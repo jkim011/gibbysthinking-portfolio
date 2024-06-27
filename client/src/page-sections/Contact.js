@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import axios from "axios";
 
 function Contact() {
   const [name, setName] = useState("");
@@ -6,8 +7,17 @@ function Contact() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmitForm = (e) => {
-    
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "/api/send-email",
+        { name, email, subject, message }
+      )
+      alert("success") // need to reset state so form is empty after sending
+    } catch (error) {
+      console.log("Error sending email: ", error)
+    }
   }
 
   return (
