@@ -32,11 +32,12 @@ function AboutMe() {
         { headers: { "Content-Type": "application/json" } }
       ); 
       console.log(response.data)
+      alert("Changes saved")
     } catch (error) {
       console.error("Error editing about me:", error);
     }
   };
- console.log(user)
+
   return (
     <div className="about-me">
       <div className="about-me-text ms-lg-3">

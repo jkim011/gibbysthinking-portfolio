@@ -186,6 +186,10 @@
   margin-top: 10rem;
 }
 
+.contact-forms {
+  width: 25%;
+}
+
 /* Footer/Login */
 .socials {
   margin-left: 15px;
@@ -301,6 +305,11 @@
   .about-me-pic {
     width: 350px;
   }
+
+  /* Contact me */
+  .contact-forms {
+    width: 40%;
+  }
 }
 
 @media screen and (max-width: 992px) { /* Smaller tablets */
@@ -382,6 +391,11 @@
     width: 70%;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* Contact me */
+  .contact-forms {
+    width: 40%;
   }
 }
 
@@ -485,6 +499,10 @@
     width: 40px;
     margin-top: 30px;
   }
+
+  .contact-forms {
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 280px) { /* Smaller phones */
@@ -535,5 +553,9 @@
   .socials {
     width: 35px;
     height: auto;
+  }
+
+  .contact-forms {
+    width: 95%;
   }
 }
