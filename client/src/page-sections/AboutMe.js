@@ -5,7 +5,7 @@ import GabbyAvatar from '../assets/gabby-avatar-cropped.png';
 
 function AboutMe() {
   const [user, setUser] = useState();
-  const [aboutMe, setAboutMe] = useState(user?.aboutMe);
+  const [aboutMe, setAboutMe] = useState("");
 
   useEffect(() => {
     queryMe();
@@ -14,6 +14,7 @@ function AboutMe() {
   const queryMe = async () => {
     const result = await axios.get("api/user/query-me");
     setUser(result.data.user)
+    setAboutMe(result.data.user.aboutMe);
   }
 
   const handleChange = (e) => {
@@ -46,7 +47,7 @@ function AboutMe() {
           <p>{user?.aboutMe}</p>
         ) : (
           Auth.getProfile().data.isAdmin ? (
-            <form className="edit-about-me text-start" onSubmit={handleEditAboutMe}>
+            <form className="edit-about-me text-start">
               <textarea
                 className="textarea w-100"
                 onChange={handleChange}
@@ -54,8 +55,9 @@ function AboutMe() {
                 value={aboutMe}
                 rows={6}
               />
-              <div>
-                <button className="button-submit" type="submit">Save Changes</button>
+              <div className="d-flex justify-content-end mt-1">
+                <button className="me-2" onClick={() => {return}}>Cancel</button>
+                <button className="button-submit" onClick={handleEditAboutMe}>Save Changes</button>
               </div>
             </form>
           ) : (
